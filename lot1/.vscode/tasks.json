@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "task-mkdir",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "${workspaceFolder}\\build"
+            ],
+            "group": "build",
+        },
+        {
+            "label": "task-gen",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": "build",
+            //"dependsOn":[ "task-mkdir" ],
+            //"dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "task-build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                ".",
+                "--config",
+                "Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "task-build-rel",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                ".",
+                "--config",
+                "Release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
