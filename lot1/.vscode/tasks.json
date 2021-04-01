@@ -9,6 +9,7 @@
                 "${workspaceFolder}\\build"
             ],
             "group": "build",
+            "problemMatcher": []
         },
         {
             "label": "task-gen",
@@ -21,8 +22,6 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "group": "build",
-            //"dependsOn":[ "task-mkdir" ],
-            //"dependsOrder": "sequence",
             "problemMatcher": []
         },
         {
@@ -41,7 +40,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "task-build-rel",
@@ -59,7 +59,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         }
     ]
 }
