@@ -13,6 +13,8 @@ extern "C"
 
 	SEP_API void f1(void);
 
+	SEP_API void f2(const wchar_t *str);
+
 #ifdef __cplusplus
 }
 #endif

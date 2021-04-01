@@ -17,3 +17,15 @@ SEP_API void f1(void)
 
 	cout << "dll.f1().end." << endl;
 }
+
+
+SEP_API void f2(const wchar_t* str)
+{
+	wcout << "f2(), " << str << endl;
+
+	char buf[100] = {};
+	size_t s = wcstombs(buf, str, sizeof(buf));
+	cout << "--" << endl;
+	cout << "wcs -> " << s << ", " << buf;
+}
+
