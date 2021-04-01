@@ -21,11 +21,15 @@ int main(void)
 	l1 = setlocale(LC_ALL, nullptr);
 	cout << "setlocale(), -> " << (l1 ? l1 : "?") << endl;
 
+	f1();
+
 	lcid = ::GetThreadLocale();
 	cout << "GetThreadLocale, LCID: 0x" << hex << lcid << endl;
 
 	l1 = setlocale(LC_ALL, "");
-	cout << "setlocale(), -> " << (l1 ? l1 : "?") << endl;
+	cout << "setlocale(\"\"), -> " << (l1 ? l1 : "?") << endl;
+
+	f1();
 
 	cout << "end." << endl;
 }
