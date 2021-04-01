@@ -6,7 +6,7 @@
 
 using std::cout, std::wcout, std::endl;
 
-void f1(void)
+SEP_API void f1(void)
 {
-    cout << "dll.f1()" << endl;
+	cout << "dll.f1()" << endl;
 }

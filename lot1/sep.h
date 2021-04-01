@@ -11,7 +11,7 @@ extern "C"
 {
 #endif
 
-    SEP_API void f1(void);
+	SEP_API void f1(void);
 
 #ifdef __cplusplus
 }

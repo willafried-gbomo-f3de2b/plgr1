@@ -44,7 +44,7 @@ PRIVATE SEP_EXPORT
 )
 
 target_compile_definitions(sepl
-PRIVATE SEP_IMPL
+PRIVATE SEP_EXPORT
 )
 
 #target_compile_options(main 
