@@ -26,6 +26,6 @@ SEP_API void f2(const wchar_t* str)
 	char buf[100] = {};
 	size_t s = wcstombs(buf, str, sizeof(buf));
 	cout << "--" << endl;
-	cout << "wcs -> " << s << ", " << buf;
+	cout << "wcs -> " << s << ", " << buf << endl;
 }
 

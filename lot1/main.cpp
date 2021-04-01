@@ -13,6 +13,8 @@ int main(void)
 
 	f1();
 
+	::SetThreadLocale(0x0400);
+	
 	LCID lcid = ::GetThreadLocale();
 	cout << "GetThreadLocale, LCID: 0x" << hex << lcid << endl;
 
