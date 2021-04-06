@@ -54,4 +54,19 @@ endforeach()
 # 	WORKING_DIRECTORY ${THIRDPARTY}
 # 	)
 
+file(GLOB SUB "build-*.cmake")
+
+foreach(ITEM ${SUB})
+	message(" processing: ${ITEM}")
+	string(REGEX REPLACE ".*build-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
+	message(" > basename: ${BASENAME}")
+
+	# add_custom_command(TARGET deps PRE_BUILD
+	# 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME}"
+	# 	COMMAND ${CMAKE_COMMAND} -P ${ITEM}
+	# 	WORKING_DIRECTORY ${THIRDPARTY}
+	# 	)
+	include(${ITEM})
+endforeach()
+
 endif()
