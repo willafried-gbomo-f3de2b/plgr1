@@ -6,12 +6,24 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..",
-                
+                ".."
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
-            }
+            },
+            "problemMatcher": []
         },
+        {
+            "label": "task-mkdir",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
     ]
 }
