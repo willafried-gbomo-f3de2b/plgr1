@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "task-gen",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..",
+                
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            }
+        },
+    ]
+}
