@@ -23,3 +23,9 @@ add_custom_command(TARGET clone PRE_BUILD
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 
+add_custom_command(TARGET clone PRE_BUILD
+	COMMAND ${CMAKE_COMMAND} -E echo " >> extracting deps... "
+	COMMAND ${CMAKE_COMMAND} -E tar xz ${CMAKE_CURRENT_SOURCE_DIR}/sqlite.zip
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+	)
+
