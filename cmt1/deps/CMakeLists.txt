@@ -32,7 +32,7 @@ add_custom_command(TARGET deps PRE_BUILD
 
 add_custom_command(TARGET deps PRE_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo " >> downloading deps... "
-	COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/fetch-deps.cmake
+	COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/fetch-sqlite.cmake
 	WORKING_DIRECTORY ${THIRDPARTY}
 	)
 
