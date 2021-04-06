@@ -23,16 +23,17 @@ add_custom_command(TARGET deps PRE_BUILD
 	)
 
 file(GLOB SUB "prepare-*.cmake")
+
 foreach(ITEM ${SUB})
 	message(" processing: ${ITEM}")
 	string(REGEX REPLACE ".*prepare-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
 	message(" > basename: ${BASENAME}")
 
-add_custom_command(TARGET deps PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME}"
-	COMMAND ${CMAKE_COMMAND} -P ${ITEM}
-	WORKING_DIRECTORY ${THIRDPARTY}
-	)
+	add_custom_command(TARGET deps PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME}"
+		COMMAND ${CMAKE_COMMAND} -P ${ITEM}
+		WORKING_DIRECTORY ${THIRDPARTY}
+		)
 endforeach()
 
 add_custom_command(TARGET deps PRE_BUILD

@@ -24,6 +24,18 @@
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "task-deps-prepare",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", ".", "--target", "deps",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
     ]
 }
