@@ -10,6 +10,6 @@ file(ARCHIVE_EXTRACT
 	)
 
 file(GLOB OUT sqlite-amalgamation-*)
-message("  >>> renaming sqlite directory... [${OUT}] => [sqlite-amalgamation]")
+message("  >>> renaming sqlite directory... [sqlite-amalgamation]")
 file(RENAME ${OUT} sqlite-amalgamation)
 
