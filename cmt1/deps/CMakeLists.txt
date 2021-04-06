@@ -11,6 +11,15 @@ add_custom_target(deps)
 
 if(DEPS_DOWNLOAD)
 
+
+file(GLOB OUT thirdparty/sqlite-*)
+message("GLOB: ${OUT}")
+
+foreach(ITEM ${OUT})
+	message("  ITEM: ${ITEM}")
+endforeach()
+
+
 add_custom_command(TARGET deps PRE_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo " >> deleting deps directory... [${THIRDPARTY}] "
 	COMMAND ${CMAKE_COMMAND} -E rm -fR thirdparty
