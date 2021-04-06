@@ -13,7 +13,7 @@ add_executable(main ${SOURCES})
 
 add_custom_target(cust)
 
-add_subdirectory(thirdparty)
+add_subdirectory(deps)
 
 
 
