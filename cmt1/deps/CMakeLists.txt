@@ -5,9 +5,11 @@ project(deps)
 
 option(DEPS_DOWNLOAD "" OFF)
 
-if(DEPS_DOWNLOAD)
 
-add_custom_target(clone)
+
+add_custom_target(deps)
+
+if(DEPS_DOWNLOAD)
 
 add_custom_command(TARGET clone PRE_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo " >> removing deps directory... "
