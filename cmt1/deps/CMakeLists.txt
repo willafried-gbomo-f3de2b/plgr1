@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.0)
 
 project(deps)
 
+
+option(DEPS_DOWNLOAD "" OFF)
+
+if(DEPS_DOWNLOAD)
+
 add_custom_target(clone)
 
 add_custom_command(TARGET clone PRE_BUILD
@@ -29,3 +34,4 @@ add_custom_command(TARGET clone PRE_BUILD
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 
+endif()
