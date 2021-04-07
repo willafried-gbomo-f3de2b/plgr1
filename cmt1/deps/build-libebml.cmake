@@ -15,7 +15,7 @@ add_custom_command(TARGET deps-libebml
 
 add_custom_command(TARGET deps-libebml
 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} gen"
-	COMMAND ${CMAKE_COMMAND}  ${SRCDIR}/libebml
+	COMMAND ${CMAKE_COMMAND}  ${SRCDIR}/libebml -D BUILD_SHARED_LIBS=1 
 	WORKING_DIRECTORY ${BLDDIR}/deps-libebml
 	)
 
