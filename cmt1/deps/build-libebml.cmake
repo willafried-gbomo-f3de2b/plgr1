@@ -5,7 +5,7 @@ message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
 
 add_custom_target(deps-libebml)
-add_dependencies(deps deps-libebml)
+# add_dependencies(deps deps-libebml)
 
 add_custom_command(TARGET deps-libebml
 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} dir"

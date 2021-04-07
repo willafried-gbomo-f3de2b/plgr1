@@ -31,3 +31,12 @@ foreach(ITEM ${SUB})
 	message(" > gen: basename: ${BASENAME}")
 	include(${ITEM})
 endforeach()
+
+file(GLOB SUB "depend-*.cmake")
+foreach(ITEM ${SUB})
+	message(" processing: ${ITEM}")
+	string(REGEX REPLACE ".*depend-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
+	message(" > dep : basename: ${BASENAME}")
+	include(${ITEM})
+endforeach()
+
