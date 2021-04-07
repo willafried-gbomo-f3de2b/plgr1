@@ -26,7 +26,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-deps-prepare",
+            "label": "task-build-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
