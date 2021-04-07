@@ -14,7 +14,7 @@ add_custom_command(TARGET deps-libmatroska
 
 add_custom_command(TARGET deps-libmatroska
 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} gen"
-	COMMAND ${CMAKE_COMMAND}  ${SRCDIR}/libmatroska -D BUILD_SHARED_LIBS=1 -D EBML_DIR=${BLDDIR}/deps-libebml 
+	COMMAND ${CMAKE_COMMAND}  ${SRCDIR}/libmatroska -D BUILD_SHARED_LIBS=1 -D EBML_DIR=${BLDDIR}/out/lib/cmake/EBML 
 	WORKING_DIRECTORY ${BLDDIR}/deps-libmatroska
 	)
 

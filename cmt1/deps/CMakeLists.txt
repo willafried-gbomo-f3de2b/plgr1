@@ -40,3 +40,11 @@ foreach(ITEM ${SUB})
 	include(${ITEM})
 endforeach()
 
+file(GLOB SUB "install-*.cmake")
+foreach(ITEM ${SUB})
+	message(" processing: ${ITEM}")
+	string(REGEX REPLACE ".*install-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
+	message(" > dep : basename: ${BASENAME}")
+	include(${ITEM})
+endforeach()
+
