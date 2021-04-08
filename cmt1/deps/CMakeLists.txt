@@ -4,69 +4,47 @@ project(deps)
 
 option(DEPS_DOWNLOAD "" ON)
 
-set(THIRDPARTY "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
+set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
+set(BLDDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty")
 
 add_custom_target(deps)
 
 if(DEPS_DOWNLOAD)
+	file(REMOVE_RECURSE ${SRCDIR})
+	file(MAKE_DIRECTORY ${SRCDIR})
 
-# add_custom_command(TARGET deps PRE_BUILD
-# 	COMMAND ${CMAKE_COMMAND} -E echo " >> deleting deps directory... [${THIRDPARTY}] "
-# 	COMMAND ${CMAKE_COMMAND} -E rm -fR thirdparty
-# 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-# 	)
-#
-# add_custom_command(TARGET deps PRE_BUILD
-# 	COMMAND ${CMAKE_COMMAND} -E echo " >> creating deps directory... [${THIRDPARTY}] "
-# 	COMMAND ${CMAKE_COMMAND} -E make_directory ${THIRDPARTY}
-# 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-# 	)
+	file(GLOB SUB "prepare-*.cmake")
+	foreach(ITEM ${SUB})
+		message(" > prepare: processing: ${ITEM}")
+		string(REGEX REPLACE ".*prepare-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
+		message(" > basename: ${BASENAME}")
+		include(${ITEM})
+	endforeach()
+endif()
 
-file(REMOVE_RECURSE ${THIRDPARTY})
-file(MAKE_DIRECTORY ${THIRDPARTY})
-
-
-file(GLOB SUB "prepare-*.cmake")
-
-foreach(ITEM ${SUB})
-	message(" processing: ${ITEM}")
-	string(REGEX REPLACE ".*prepare-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
-	message(" > basename: ${BASENAME}")
-
-	# add_custom_command(TARGET deps PRE_BUILD
-	# 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME}"
-	# 	COMMAND ${CMAKE_COMMAND} -P ${ITEM}
-	# 	WORKING_DIRECTORY ${THIRDPARTY}
-	# 	)
-	include(${ITEM})
-endforeach()
-
-# add_custom_command(TARGET deps PRE_BUILD
-# 	COMMAND ${CMAKE_COMMAND} -E echo " >> cloning deps... "
-# 	COMMAND git clone https://github.com/Matroska-Org/libebml.git
-# 	COMMAND git clone https://github.com/Matroska-Org/libmatroska.git
-# 	WORKING_DIRECTORY ${THIRDPARTY}
-# 	)
-
-# add_custom_command(TARGET deps PRE_BUILD
-# 	COMMAND ${CMAKE_COMMAND} -E echo " >> downloading deps... "
-# 	COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/fetch-sqlite.cmake
-# 	WORKING_DIRECTORY ${THIRDPARTY}
-# 	)
+file(MAKE_DIRECTORY ${BLDDIR})
 
 file(GLOB SUB "build-*.cmake")
-
 foreach(ITEM ${SUB})
 	message(" processing: ${ITEM}")
 	string(REGEX REPLACE ".*build-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
-	message(" > basename: ${BASENAME}")
-
-	# add_custom_command(TARGET deps PRE_BUILD
-	# 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME}"
-	# 	COMMAND ${CMAKE_COMMAND} -P ${ITEM}
-	# 	WORKING_DIRECTORY ${THIRDPARTY}
-	# 	)
+	message(" > gen: basename: ${BASENAME}")
 	include(${ITEM})
 endforeach()
 
-endif()
+file(GLOB SUB "depend-*.cmake")
+foreach(ITEM ${SUB})
+	message(" processing: ${ITEM}")
+	string(REGEX REPLACE ".*depend-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
+	message(" > dep : basename: ${BASENAME}")
+	include(${ITEM})
+endforeach()
+
+file(GLOB SUB "install-*.cmake")
+foreach(ITEM ${SUB})
+	message(" processing: ${ITEM}")
+	string(REGEX REPLACE ".*install-(.+)\\.cmake" "\\1" BASENAME ${ITEM})
+	message(" > dep : basename: ${BASENAME}")
+	include(${ITEM})
+endforeach()
+
