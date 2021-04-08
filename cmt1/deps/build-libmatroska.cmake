@@ -20,7 +20,7 @@ add_custom_command(TARGET deps-libmatroska
 
 add_custom_command(TARGET deps-libmatroska
 	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} build"
-	COMMAND ${CMAKE_COMMAND} --build . 
+	COMMAND ${CMAKE_COMMAND} --build . --config $<CONFIG>
 	WORKING_DIRECTORY ${BLDDIR}/deps-libmatroska
 	)
 
