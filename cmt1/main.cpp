@@ -1,8 +1,16 @@
 
+#include <matroska/FileKax.h>
+
+#include <iostream>
+#include <string>
 
 
-void main(void)
+using std::cout, std::endl;
+
+int main(void)
 {
+    cout << "main()." << endl;
+    matroska_init();
 
 }
 

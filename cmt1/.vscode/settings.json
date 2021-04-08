@@ -1,2 +1,8 @@
 {
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.browse.path": [
+        "${default}",
+        "build/deps/thirdparty/out/include"
+    ],
+
 }

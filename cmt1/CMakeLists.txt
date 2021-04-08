@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(proj1)
 
+option(BUILD_DEPS "" ON)
+
 set(SOURCES 
 	main.cpp
 	)
@@ -10,13 +12,28 @@ add_executable(main ${SOURCES})
 
 add_custom_target(cust)
 
-add_subdirectory(deps)
+if(BUILD_DEPS)
+	add_subdirectory(deps)
+endif()
+
+target_compile_features(main
+	PRIVATE cxx_std_17
+)
+
+target_include_directories(main 
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/include
+	)
+
+target_link_directories(main 
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/lib
+	)
+
+target_link_libraries(main 
+	PRIVATE matroska.lib 
+	)
 
 add_custom_command(TARGET cust PRE_BUILD
 	COMMAND dir
 	)
 
-project(proj2)
-
-add_library(main2 ${SOURCES})
 
