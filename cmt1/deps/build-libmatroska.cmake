@@ -6,7 +6,11 @@ message("adding custom target libmatroska...")
 message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
 
-add_custom_target(deps-libmatroska)
+add_custom_target(${TARGETNAME})
+
+add_custom_command(TARGET ${TARGETNAME}
+	COMMAND ${CMAKE_COMMAND} -E echo " > ${TARGETNAME}: $<CONFIG>"
+)
 
 add_custom_command(TARGET ${TARGETNAME}
 	COMMAND ${CMAKE_COMMAND} -E echo " <CONFIG>: $<CONFIG>"

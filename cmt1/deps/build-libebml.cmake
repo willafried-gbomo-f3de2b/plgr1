@@ -21,20 +21,24 @@ add_custom_command(TARGET ${TARGETNAME}
 	)
 
 add_custom_command(TARGET ${TARGETNAME}
-	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} dir"
+	COMMAND ${CMAKE_COMMAND} -E echo " > ${TARGETNAME}: $<CONFIG>"
+)
+
+add_custom_command(TARGET ${TARGETNAME}
+	COMMAND ${CMAKE_COMMAND} -E echo "  >> directory: ${TARGETNAME}"
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${BLDDIR}/${TARGETNAME}
 	WORKING_DIRECTORY ${BLDDIR}
-	)
+)
 
 add_custom_command(TARGET ${TARGETNAME}
-	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} gen"
-	COMMAND ${CMAKE_COMMAND}  ${SRCDIR}/libebml -D BUILD_SHARED_LIBS=1 
+	COMMAND ${CMAKE_COMMAND} -E echo "  >> generate: ${TARGETNAME}"
+	COMMAND ${CMAKE_COMMAND}  ${SRCDIR}/libebml -D BUILD_SHARED_LIBS=1 $<$<BOOL:$<CONFIG>>:"-DCMAKE_BUILD_TYPE=$<CONFIG>">
 	WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
-	)
+)
 
 add_custom_command(TARGET ${TARGETNAME}
-	COMMAND ${CMAKE_COMMAND} -E echo " >> ${BASENAME} build"
+	COMMAND ${CMAKE_COMMAND} -E echo "  >> build: ${BASENAME}"
 	COMMAND ${CMAKE_COMMAND} --build . --config $<CONFIG>
 	WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
-	)
+)
 
