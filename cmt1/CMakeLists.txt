@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(proj1)
 
+option(DEPS_DOWNLOAD "" ON)
 option(BUILD_DEPS "" ON)
 
 set(SOURCES 
@@ -22,18 +23,18 @@ target_compile_features(main
 
 target_include_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/include
-	)
+)
 
 target_link_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/lib
-	)
+)
 
 target_link_libraries(main 
 	PRIVATE matroska.lib 
-	)
+)
 
 add_custom_command(TARGET cust PRE_BUILD
 	COMMAND dir
-	)
+)
 
 
