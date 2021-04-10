@@ -31,8 +31,8 @@ add_custom_command(TARGET ${TARGETNAME}
 	WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
 )
 
-add_custom_command(TARGET deps-libebml
+add_custom_command(TARGET ${TARGETNAME}
     COMMAND ${CMAKE_COMMAND} -E echo "  >> install: ${BASENAME}"
-    COMMAND ${CMAKE_COMMAND} --install . --prefix ${BLDDIR}/out --config $<CONFIG>
-    WORKING_DIRECTORY ${BLDDIR}/deps-libebml
+    COMMAND ${CMAKE_COMMAND} --install . --prefix ${INSDIR} --config $<CONFIG>
+    WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
 )
