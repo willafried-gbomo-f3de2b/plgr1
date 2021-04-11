@@ -24,6 +24,8 @@ if(DEPS_DOWNLOAD)
 		message(" > prepare: ${BASENAME}")
 		include(${ITEM})
 	endforeach()
+
+	set(DEPS_DOWNLOAD OFF CACHE BOOL "")
 endif()
 
 if(DEPS_BUILD)
@@ -45,6 +47,8 @@ if(DEPS_BUILD)
 		message(" > dep: ${BASENAME}")
 		include(${ITEM})
 	endforeach()
+
+	set(DEPS_BUILD OFF CACHE BOOL "")
 endif()
 
 
