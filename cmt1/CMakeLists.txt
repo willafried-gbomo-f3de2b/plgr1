@@ -22,11 +22,11 @@ target_compile_features(main
 )
 
 target_include_directories(main 
-	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/include
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/include
 )
 
 target_link_directories(main 
-	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/lib
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib
 )
 
 target_link_libraries(main 

@@ -11,7 +11,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
-                    "name": "path", "value": "${workspaceFolder}/build/deps/thirdparty/out/bin"
+                    "name": "path", "value": "${workspaceFolder}/build/deps/out/bin"
                 }
             ],
             "console": "externalTerminal"
