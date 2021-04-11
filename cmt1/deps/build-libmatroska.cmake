@@ -21,7 +21,7 @@ add_custom_command(TARGET ${TARGETNAME}
 
 add_custom_command(TARGET ${TARGETNAME}
 	COMMAND ${CMAKE_COMMAND} -E echo "  >> generate: ${TARGETNAME}"
-	COMMAND ${CMAKE_COMMAND} ${SRCDIR}/libmatroska -D BUILD_SHARED_LIBS=1 -D EBML_DIR=${INSDIR}/lib/cmake/EBML  $<$<BOOL:$<CONFIG>>:"-DCMAKE_BUILD_TYPE=$<CONFIG>">
+	COMMAND ${CMAKE_COMMAND} ${SRCDIR}/libmatroska -D BUILD_SHARED_LIBS=1 -D EBML_DIR=${INSDIR}/lib/cmake/EBML $<$<BOOL:$<CONFIG>>:"-DBUILD_TYPE=$<CONFIG>">
 	WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
 )
 
@@ -33,7 +33,7 @@ add_custom_command(TARGET ${TARGETNAME}
 
 add_custom_command(TARGET ${TARGETNAME}
 	COMMAND ${CMAKE_COMMAND} -E echo "  >> install: ${BASENAME}"
-    COMMAND ${CMAKE_COMMAND} --install . --prefix ${INSDIR}  --config $<CONFIG>
+    COMMAND ${CMAKE_COMMAND} --install . --prefix ${INSDIR} --config $<CONFIG>
     WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
 )
 
