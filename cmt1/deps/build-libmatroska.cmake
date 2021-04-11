@@ -2,6 +2,8 @@
 
 set(TARGETNAME "deps-libmatroska")
 
+include(GNUInstallDirs) 
+
 message("adding custom target libmatroska...")
 message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
