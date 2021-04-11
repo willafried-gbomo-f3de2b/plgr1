@@ -5,7 +5,7 @@ set(TARGETNAME "deps-libmatroska")
 message("adding custom target libmatroska...")
 message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
-message("INSDIR: ${INSDIR}")
+message("INSDIR: ${DSTDIR}")
 
 add_custom_target(${TARGETNAME})
 
@@ -33,7 +33,7 @@ add_custom_command(TARGET ${TARGETNAME}
 
 add_custom_command(TARGET ${TARGETNAME}
 	COMMAND ${CMAKE_COMMAND} -E echo "  >> install: ${BASENAME}"
-    COMMAND ${CMAKE_COMMAND} --install . --prefix ${INSDIR} --config $<CONFIG>
+    COMMAND ${CMAKE_COMMAND} --install . --prefix ${DSTDIR} --config $<CONFIG>
     WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
 )
 

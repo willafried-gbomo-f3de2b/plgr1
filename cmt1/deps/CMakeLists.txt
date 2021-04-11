@@ -8,7 +8,7 @@ option(DEPS_CRT_STATIC "" OFF)
 
 set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
 set(BLDDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty")
-set(INSDIR "${CMAKE_CURRENT_BINARY_DIR}/out")
+set(DSTDIR "${CMAKE_CURRENT_BINARY_DIR}/out")
 
 add_custom_target(deps)
 

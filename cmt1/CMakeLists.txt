@@ -16,6 +16,10 @@ add_executable(main ${SOURCES})
 
 if(BUILD_DEPS OR DEPS_DOWNLOAD)
 	add_subdirectory(deps)
+	add_dependencies(main deps)
+
+	set(DEPS_DOWNLOAD OFF CACHE BOOL "")
+	set(DEPS_BUILD OFF CACHE BOOL "")
 endif()
 
 target_compile_features(main
