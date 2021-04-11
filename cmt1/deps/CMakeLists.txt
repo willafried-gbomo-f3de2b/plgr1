@@ -6,9 +6,12 @@ option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
 option(DEPS_CRT_STATIC "" OFF)
 
+include(GNUInstallDirs)
+
 set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
 set(BLDDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty")
 set(DSTDIR "${CMAKE_CURRENT_BINARY_DIR}/out")
+message("CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
 
 add_custom_target(deps)
 

@@ -6,6 +6,7 @@ message("adding custom target libmatroska...")
 message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
 message("DSTDIR: ${DSTDIR}")
+message("CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
 
 add_custom_target(${TARGETNAME})
 
