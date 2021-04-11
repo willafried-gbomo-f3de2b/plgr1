@@ -14,7 +14,7 @@ set(SOURCES
 
 add_executable(main ${SOURCES})
 
-if(BUILD_DEPS OR DEPS_DOWNLOAD)
+if(DEPS_BUILD OR DEPS_DOWNLOAD)
 	add_subdirectory(deps)
 	add_dependencies(main deps)
 
