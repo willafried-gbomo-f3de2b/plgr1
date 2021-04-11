@@ -14,6 +14,22 @@
                     "name": "path", "value": "${workspaceFolder}/build/deps/out/bin"
                 }
             ],
+            "console": "integratedTerminal"
+            
+        },
+        {
+            "name": "run release",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Release/main.exe",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "path", "value": "${workspaceFolder}/build/deps/out/bin"
+                }
+            ],
             "console": "externalTerminal"
             
         }
