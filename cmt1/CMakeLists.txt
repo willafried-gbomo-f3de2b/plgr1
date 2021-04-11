@@ -30,8 +30,12 @@ target_link_directories(main
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib
 )
 
+target_link_directories(main 
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib64
+)
+
 target_link_libraries(main 
-	PRIVATE matroska.lib 
+	PRIVATE matroska 
 )
 
 
