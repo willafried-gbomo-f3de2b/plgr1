@@ -4,6 +4,7 @@ project(deps)
 
 option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
+option(DEPS_CRT_STATIC "" OFF)
 
 set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
 set(BLDDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty")
@@ -26,7 +27,7 @@ if(DEPS_DOWNLOAD)
 endif()
 
 if(DEPS_BUILD)
-	message("building deps...")
+	message("processing deps...")
 	file(MAKE_DIRECTORY ${BLDDIR})
 
 	file(GLOB SUB "build-*.cmake")

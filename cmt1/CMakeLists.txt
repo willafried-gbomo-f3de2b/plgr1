@@ -3,7 +3,10 @@ cmake_minimum_required(VERSION 3.0)
 project(proj1)
 
 option(DEPS_DOWNLOAD "" ON)
-option(BUILD_DEPS "" ON)
+option(DEPS_BUILD "" ON)
+option(DEPS_CRT_STATIC "" OFF)
+
+option(CRT_STATIC "" OFF)
 
 set(SOURCES 
 	main.cpp
@@ -11,9 +14,7 @@ set(SOURCES
 
 add_executable(main ${SOURCES})
 
-add_custom_target(cust)
-
-if(BUILD_DEPS)
+if(BUILD_DEPS OR DEPS_DOWNLOAD)
 	add_subdirectory(deps)
 endif()
 
@@ -33,8 +34,6 @@ target_link_libraries(main
 	PRIVATE matroska.lib 
 )
 
-add_custom_command(TARGET cust PRE_BUILD
-	COMMAND dir
-)
+
 
 
