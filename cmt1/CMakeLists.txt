@@ -46,7 +46,7 @@ message(" -> CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
 
 set(SOURCES 
 	main.cpp
-	)
+)
 
 add_executable(main ${SOURCES})
 
