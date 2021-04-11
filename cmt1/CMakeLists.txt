@@ -19,7 +19,7 @@ if(DEPS_BUILD OR DEPS_DOWNLOAD)
 	add_dependencies(main deps)
 
 	set(DEPS_DOWNLOAD OFF CACHE BOOL "" FORCE)
-	set(DEPS_BUILD OFF CACHE BOOL "" FORCE)
+	# set(DEPS_BUILD OFF CACHE BOOL "" FORCE)
 endif()
 
 target_compile_features(main

@@ -48,7 +48,7 @@ if(DEPS_BUILD)
 		include(${ITEM})
 	endforeach()
 
-	set(DEPS_BUILD OFF CACHE BOOL "")
+	# set(DEPS_BUILD OFF CACHE BOOL "")
 endif()
 
 
