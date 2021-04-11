@@ -5,7 +5,7 @@ set(TARGETNAME "deps-libebml")
 message("adding custom target ebml...")
 message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
-message("INSDIR: ${DSTDIR}")
+message("DSTDIR: ${DSTDIR}")
 
 add_custom_target(deps-libebml)
 

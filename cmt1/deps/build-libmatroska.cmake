@@ -5,7 +5,7 @@ set(TARGETNAME "deps-libmatroska")
 message("adding custom target libmatroska...")
 message("SRCDIR: ${SRCDIR}")
 message("BLDDIR: ${BLDDIR}")
-message("INSDIR: ${DSTDIR}")
+message("DSTDIR: ${DSTDIR}")
 
 add_custom_target(${TARGETNAME})
 
@@ -21,7 +21,7 @@ add_custom_command(TARGET ${TARGETNAME}
 
 add_custom_command(TARGET ${TARGETNAME}
 	COMMAND ${CMAKE_COMMAND} -E echo "  >> generate: ${TARGETNAME}"
-	COMMAND ${CMAKE_COMMAND} ${SRCDIR}/libmatroska -D BUILD_SHARED_LIBS=1 -D EBML_DIR=${INSDIR}/lib/cmake/EBML $<$<BOOL:$<CONFIG>>:"-DCMAKE_BUILD_TYPE=$<CONFIG>">
+	COMMAND ${CMAKE_COMMAND} ${SRCDIR}/libmatroska -D BUILD_SHARED_LIBS=1 -D EBML_DIR=${DSTDIR}/lib/cmake/EBML $<$<BOOL:$<CONFIG>>:"-DCMAKE_BUILD_TYPE=$<CONFIG>">
 	WORKING_DIRECTORY ${BLDDIR}/${TARGETNAME}
 )
 
