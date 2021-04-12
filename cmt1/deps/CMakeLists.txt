@@ -4,7 +4,7 @@ project(deps)
 
 option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
-option(DEPS_CRT_STATIC "" OFF)
+option(CRT_STATIC "" OFF)
 
 include(GNUInstallDirs)
 

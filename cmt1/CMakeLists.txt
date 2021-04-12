@@ -4,9 +4,9 @@ project(proj1)
 
 option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
-option(DEPS_CRT_STATIC "" OFF)
 option(CRT_STATIC "" OFF)
 
+# msvc crt static/dynamic link option
 if (MSVC)
 	message(" >  CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
 	string(REGEX REPLACE "/M[DT]d? *" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
