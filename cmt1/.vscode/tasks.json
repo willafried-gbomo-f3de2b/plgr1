@@ -2,18 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "task-gen",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                ".."
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/build"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "task-mkdir",
             "type": "shell",
             "command": "mkdir",
@@ -26,16 +14,65 @@
             "problemMatcher": []
         },
         {
-            "label": "task-build-deps",
+            "label": "task-gen",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", ".", "--target", "deps",
+                ".."
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": []
         },
+        {
+            "label": "task-deps-build-debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", ".", "--target", "deps", "--config", "Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-deps-build-release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", ".", "--target", "deps", "--config", "Release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-build-debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", ".", "--config", "Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-build-release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", ".", "--config", "Release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+
     ]
 }

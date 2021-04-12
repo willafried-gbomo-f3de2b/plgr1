@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "run",
+            "name": "debug",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Debug/main.exe",
@@ -11,13 +11,14 @@
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
-                    "name": "path", "value": "${workspaceFolder}/build/deps/out/bin"
+                    "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/bin"
                 }
             ],
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "preLaunchTask": "task-build-debug",
         },
         {
-            "name": "run release",
+            "name": "release",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Release/main.exe",
@@ -26,11 +27,11 @@
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
-                    "name": "path", "value": "${workspaceFolder}/build/deps/out/bin"
+                    "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/bin"
                 }
             ],
-            "console": "externalTerminal"
-            
+            "console": "externalTerminal",
+            "preLaunchTask": "task-build-release",
         }
     ]
 }
