@@ -15,7 +15,6 @@
                 }
             ],
             "console": "integratedTerminal"
-            
         },
         {
             "name": "run release",
