@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(proj1)
 
+# options
 option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
 option(CRT_STATIC "" OFF)
@@ -40,7 +41,7 @@ if (MSVC)
 	endif()
 endif()
 
-# linux
+# linux debug config
 if(UNIX)
 	string(REGEX REPLACE "-g *" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 	string(REGEX REPLACE "-g *" "" CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
@@ -52,7 +53,6 @@ if(UNIX)
 
 	string(APPEND CMAKE_C_FLAGS_DEBUG " -g")
 	string(APPEND CMAKE_C_FLAGS_RelWithDebInfo " -g")
-
 	string(APPEND CMAKE_CXX_FLAGS_DEBUG " -g")
 	string(APPEND CMAKE_CXX_FLAGS_RelWithDebInfo " -g")
 endif()
@@ -64,20 +64,24 @@ message(" -> CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 message(" -> CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 message(" -> CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
 
+# main target sources
 set(SOURCES 
 	main.cpp
 )
 
+# declare main target
 add_executable(main ${SOURCES})
 
+# dependencies
 if(DEPS_BUILD OR DEPS_DOWNLOAD)
 	add_subdirectory(deps)
-	#add_dependencies(main deps)
+	add_dependencies(main deps)
 
 	set(DEPS_DOWNLOAD OFF CACHE BOOL "" FORCE)
 	#set(DEPS_BUILD OFF CACHE BOOL "" FORCE)
 endif()
 
+#main target settings
 target_compile_features(main
 	PRIVATE cxx_std_17
 )
