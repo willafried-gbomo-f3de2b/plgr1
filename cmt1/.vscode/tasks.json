@@ -14,11 +14,11 @@
             "problemMatcher": []
         },
         {
-            "label": "task-gen",
+            "label": "task-win-gen",
             "type": "shell",
             "command": "cmake",
             "args": [
-                ".."
+                "..", "-DBUILD_SHARED_LIBS=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -26,7 +26,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-deps-build-debug",
+            "label": "task-win-deps-build-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -38,7 +38,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-deps-build-release",
+            "label": "task-win-deps-build-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -50,7 +50,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-build-debug",
+            "label": "task-win-build-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -62,7 +62,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-build-release",
+            "label": "task-win-build-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -73,6 +73,53 @@
             },
             "problemMatcher": []
         },
-
+        {
+            "label": "task-lnx-gen-debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..", "-DCMAKE_BUILD_TYPE=Debug", "-DBUILD_SHARED_LIBS=1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-lnx-gen-release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..", "-DCMAKE_BUILD_TYPE=Release", "-DBUILD_SHARED_LIBS=1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-lnx-deps-build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", ".", "--target", "deps"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-lnx-build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", "."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
     ]
 }
