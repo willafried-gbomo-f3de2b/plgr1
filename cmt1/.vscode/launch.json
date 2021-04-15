@@ -35,7 +35,7 @@
                 }
             ],
             "console": "integratedTerminal",
-            "preLaunchTask": "task-build-debug",
+            "preLaunchTask": "task-win-build-debug",
         },
         {
             "name": "release",
@@ -51,7 +51,7 @@
                 }
             ],
             "console": "externalTerminal",
-            "preLaunchTask": "task-build-release",
+            "preLaunchTask": "task-win-build-release",
         }
     ]
 }
