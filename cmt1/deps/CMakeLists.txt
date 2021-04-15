@@ -57,8 +57,8 @@ if(DEPS_BUILD)
 
 	add_custom_command(TARGET deps
 		COMMAND ${CMAKE_COMMAND} -E echo "copying dep files..."
-    	COMMAND ${CMAKE_COMMAND} -P copy-deps.cmake -D CPYDIR="${CPYDIR}" -D DSTDIR="${DSTDIR}"
-    	WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
+    	COMMAND ${CMAKE_COMMAND} -D CPYDIR="${CPYDIR}" -D DSTDIR="${DSTDIR}" -D CONFIG=$<CONFIG> -P "${CMAKE_CURRENT_SOURCE_DIR}/copy-deps.cmake"
+    	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 	)
 endif()
 
