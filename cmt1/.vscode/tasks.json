@@ -14,11 +14,23 @@
             "problemMatcher": []
         },
         {
+            "label": "task-win-gen-with-deps",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "task-win-gen",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DBUILD_SHARED_LIBS=1"
+                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
