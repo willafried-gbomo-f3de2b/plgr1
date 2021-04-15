@@ -10,7 +10,9 @@ include(GNUInstallDirs)
 
 set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty")
 set(BLDDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty")
-set(DSTDIR "${CMAKE_CURRENT_BINARY_DIR}/out")
+set(DSTDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/out")
+set(CPYDIR "${CMAKE_CURRENT_BINARY_DIR}/out")
+
 message("CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
 
 add_custom_target(deps)
@@ -52,6 +54,12 @@ if(DEPS_BUILD)
 	endforeach()
 
 	# set(DEPS_BUILD OFF CACHE BOOL "")
+
+	add_custom_command(TARGET deps
+		COMMAND ${CMAKE_COMMAND} -E echo "copying dep files..."
+    	COMMAND ${CMAKE_COMMAND} -P copy-deps.cmake -D CPYDIR="${CPYDIR}" -D DSTDIR="${DSTDIR}"
+    	WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
+	)
 endif()
 
 
