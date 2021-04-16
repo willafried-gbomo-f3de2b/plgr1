@@ -17,7 +17,7 @@ file(ARCHIVE_EXTRACT INPUT ${SRCDIR}/sqlite-amalgamation.zip
 file(GLOB LST "${SRCDIR}/sqlite-amalgamation-*")
 foreach(ITEM ${LST})
 	if(IS_DIRECTORY ${ITEM})
-		message("ITEM: ${ITEM}")
+		#message("ITEM: ${ITEM}")
 		#cmake_path(GET ${ITEM} PARENT_PATH DIR)
 		#cmake_path(GET ${ITEM} FILE_NAME FN)
 		#message("  >> renaming ${FN} -> sqlite-amalgamation")
