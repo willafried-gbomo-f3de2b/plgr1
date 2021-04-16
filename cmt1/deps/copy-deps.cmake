@@ -19,7 +19,7 @@ if (CPYDIR)
     foreach(ITEM ${SUB})
         file(RELATIVE_PATH REL_ITEM "${DSTDIR}" "${ITEM}")
         message(" ${REL_ITEM}")
-        file(COPY ${ITEM} DESTINATION ${CPYDIR}/${CONFIG}/lib)
+        file(COPY ${ITEM} DESTINATION ${CPYDIR}/${CONFIG}/bin)
     endforeach()
 
     message(" coping includes...")
