@@ -22,7 +22,7 @@ if (CPYDIR)
         file(COPY ${ITEM} DESTINATION ${CPYDIR}/${CONFIG}/bin)
     endforeach()
 
-    message(" coping includes...")
+    message(" copying headers...")
     file(COPY "${DSTDIR}/include" DESTINATION "${CPYDIR}/${CONFIG}")
 else()
 endif()

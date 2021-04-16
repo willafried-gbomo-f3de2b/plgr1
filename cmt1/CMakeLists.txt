@@ -7,6 +7,21 @@ option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
 option(CRT_STATIC "" OFF)
 
+set(ARCH "")
+set(ARCHOPT "")
+# arch
+if(MSVC)
+	if(${CMAKE_VS_PLATFORM_NAME} STREQUAL "Win32")
+		set(ARCH "32")
+		set(ARCHOPT "-A \"Win32\"")
+	elseif(${CMAKE_VS_PLATFORM_NAME} STREQUAL "x64")
+		set(ARCH "64")
+		set(ARCHOPT "-A \"x64\"")
+	endif()
+else()
+endif()
+message(" > ARCH: ${ARCH}")
+
 message(" > CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 message(" > BUILD_TYPE: ${BUILD_TYPE}")
 message(" > BUILD_SHARED_LIBS: ${BUILD_SHARED_LIBS}")
@@ -88,14 +103,17 @@ target_compile_features(main
 
 target_include_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/include
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/include
 )
 
 target_link_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib
 )
 
 target_link_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib64
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib64
 )
 
 target_link_libraries(main 

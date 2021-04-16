@@ -31,7 +31,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
-                    "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/bin"
+                    "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/Debug/bin"
                 }
             ],
             "console": "integratedTerminal",
@@ -47,7 +47,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
-                    "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/bin"
+                    "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/Release/bin"
                 }
             ],
             "console": "externalTerminal",

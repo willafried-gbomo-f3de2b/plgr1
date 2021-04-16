@@ -26,11 +26,35 @@
             "problemMatcher": []
         },
         {
+            "label": "task-win-gen-with-deps-x64",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=1", "-A", "x64"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "task-win-gen",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=0"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-win-gen-x64",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=0", "-A", "x64"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"

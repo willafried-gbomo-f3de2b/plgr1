@@ -14,6 +14,8 @@ set(DSTDIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/out")
 set(CPYDIR "${CMAKE_CURRENT_BINARY_DIR}/out")
 
 message("CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
+message("CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
+message("ARCH: ${ARCH}")
 
 add_custom_target(deps)
 
