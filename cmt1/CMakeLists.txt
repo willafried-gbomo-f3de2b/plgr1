@@ -109,11 +109,15 @@ target_include_directories(main
 target_link_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/lib
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/$<CONFIG>/lib
 )
 
 target_link_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/lib64
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib64
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/lib64
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/thirdparty/out/$<CONFIG>/lib64
 )
 
 target_link_libraries(main 

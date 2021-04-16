@@ -2,6 +2,9 @@
 
 # args: CPYDIR, DSTDIR, CONFIG
 
+message("DSTDIR: ${DSTDIR}")
+message("CPYDIR: ${CPYDIR}")
+message("CONFIG: ${CONFIG}")
 if (CPYDIR)
     #message("copying dep files...")
     file(MAKE_DIRECTORY ${CPYDIR}/${CONFIG})
