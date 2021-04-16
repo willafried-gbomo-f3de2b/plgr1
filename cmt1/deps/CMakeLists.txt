@@ -57,11 +57,19 @@ if(DEPS_BUILD)
 
 	# set(DEPS_BUILD OFF CACHE BOOL "")
 
-	add_custom_command(TARGET deps
-		COMMAND ${CMAKE_COMMAND} -E echo "copying dep files..."
-    	COMMAND ${CMAKE_COMMAND} -D CPYDIR="${CPYDIR}" -D DSTDIR="${DSTDIR}" -D CONFIG=$<CONFIG> -P "${CMAKE_CURRENT_SOURCE_DIR}/copy-deps.cmake"
-    	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+	if(MSVC)
+		add_custom_command(TARGET deps
+			COMMAND ${CMAKE_COMMAND} -E echo "copying dep files..."
+			COMMAND ${CMAKE_COMMAND} -D CPYDIR="${CPYDIR}" -D DSTDIR="${DSTDIR}" -D CONFIG=$<CONFIG> -D PLATFORM="win" -P "${CMAKE_CURRENT_SOURCE_DIR}/copy-deps.cmake"
+			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		)
+	else()
+		add_custom_command(TARGET deps
+			COMMAND ${CMAKE_COMMAND} -E echo "copying dep files..."
+			COMMAND ${CMAKE_COMMAND} -D CPYDIR="${CPYDIR}" -D DSTDIR="${DSTDIR}" -D CONFIG=$<CONFIG> -D PLATFORM="lnx" -P "${CMAKE_CURRENT_SOURCE_DIR}/copy-deps.cmake"
+			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 	)
+	endif()
 endif()
 
 

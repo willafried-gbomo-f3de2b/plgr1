@@ -1,11 +1,11 @@
 # dep/*
 
-# args: CPYDIR, DSTDIR, CONFIG
+# args: CPYDIR, DSTDIR, CONFIG, PLATFORM
 
 message("DSTDIR: ${DSTDIR}")
 message("CPYDIR: ${CPYDIR}")
 message("CONFIG: ${CONFIG}")
-if (CPYDIR)
+if (PLATFORM STREQUAL "win")
     #message("copying dep files...")
     file(MAKE_DIRECTORY ${CPYDIR}/${CONFIG})
 
@@ -28,4 +28,5 @@ if (CPYDIR)
     message(" copying headers...")
     file(COPY "${DSTDIR}/include" DESTINATION "${CPYDIR}/${CONFIG}")
 else()
+    message("-------------------------------AAAAAAAAAAAA")
 endif()
