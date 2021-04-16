@@ -8,6 +8,7 @@ message("  >> downloading ${SQLITE3_AMALGAMATION_ZIP_DOWNLOAD_URL} ...")
 file(DOWNLOAD ${SQLITE3_AMALGAMATION_ZIP_DOWNLOAD_URL} ${SRCDIR}/sqlite-amalgamation.zip)
 
 # extract
+message("  >> extracting...")
 file(ARCHIVE_EXTRACT INPUT ${SRCDIR}/sqlite-amalgamation.zip
 	DESTINATION ${SRCDIR}
 )
@@ -15,5 +16,11 @@ file(ARCHIVE_EXTRACT INPUT ${SRCDIR}/sqlite-amalgamation.zip
 # rename
 file(GLOB LST "${SRCDIR}/sqlite-amalgamation-*")
 foreach(ITEM ${LST})
-	message("ITEM: ${ITEM}")
+	if(IS_DIRECTORY ${ITEM})
+		message("ITEM: ${ITEM}")
+		#cmake_path(GET ${ITEM} PARENT_PATH DIR)
+		#cmake_path(GET ${ITEM} FILE_NAME FN)
+		#message("  >> renaming ${FN} -> sqlite-amalgamation")
+		file(RENAME ${ITEM} ${SRCDIR}/sqlite-amalgamation)
+	endif()
 endforeach()
