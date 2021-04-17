@@ -55,6 +55,8 @@ if(DEPS_BUILD)
 		include(${ITEM})
 	endforeach()
 
+	include(sqlite3.cmake)
+
 	# set(DEPS_BUILD OFF CACHE BOOL "")
 
 	if(MSVC)
