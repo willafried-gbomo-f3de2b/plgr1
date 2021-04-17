@@ -24,3 +24,8 @@ foreach(ITEM ${LST})
 		file(RENAME ${ITEM} ${SRCDIR}/sqlite-amalgamation)
 	endif()
 endforeach()
+
+# copy cmake file
+message("  >> copy & rename cmake file ...")
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/sqlite3.cmake DESTINATION ${SRCDIR}/sqlite-amalgamation)
+file(RENAME ${SRCDIR}/sqlite-amalgamation/sqlite3.cmake ${SRCDIR}/sqlite-amalgamation/CMakeLists.txt)
