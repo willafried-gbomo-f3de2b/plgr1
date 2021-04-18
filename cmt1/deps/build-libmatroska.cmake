@@ -4,12 +4,7 @@ set(TARGETNAME "deps-libmatroska")
 
 include(GNUInstallDirs)
 
-message("adding custom target libmatroska...")
-message("SRCDIR: ${SRCDIR}")
-message("BLDDIR: ${BLDDIR}")
-message("DSTDIR: ${DSTDIR}")
-message("CMAKE_INSTALL_LIBDIR: ${CMAKE_INSTALL_LIBDIR}")
-
+message(" > adding custom target ${TARGETNAME} ...")
 add_custom_target(${TARGETNAME})
 
 if(MSVC)

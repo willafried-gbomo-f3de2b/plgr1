@@ -2,17 +2,7 @@
 
 set(TARGETNAME "deps-sqlite3")
 
-message("adding custom target sqlite3...")
-message("SRCDIR: ${SRCDIR}")
-message("BLDDIR: ${BLDDIR}")
-message("DSTDIR: ${DSTDIR}")
-message("CMAKE_C_FLAGS: ${CMAKE_C_FLAGS}")
-message("CMAKE_C_FLAGS_DEBUG: ${CMAKE_C_FLAGS_DEBUG}")
-message("CMAKE_C_FLAGS_RELEASE: ${CMAKE_C_FLAGS_RELEASE}")
-message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
-message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
-message("CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
-
+message(" > adding custom target ${TARGETNAME} ...")
 add_custom_target(deps-sqlite3)
 
 if(MSVC)
