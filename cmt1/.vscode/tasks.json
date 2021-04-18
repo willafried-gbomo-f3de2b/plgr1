@@ -18,7 +18,9 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=1"
+                "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -30,7 +32,11 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=1", "-A", "x64"
+                "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=1",
+                "-A",
+                "x64"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -42,7 +48,9 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=0"
+                "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -54,7 +62,11 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DBUILD_SHARED_LIBS=1", "-DDEPS_BUILD=0", "-A", "x64"
+                "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=0",
+                "-A",
+                "x64"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -66,7 +78,12 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", ".", "--target", "deps", "--config", "Debug"
+                "--build",
+                ".",
+                "--target",
+                "deps",
+                "--config",
+                "Debug"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -78,7 +95,12 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", ".", "--target", "deps", "--config", "Release"
+                "--build",
+                ".",
+                "--target",
+                "deps",
+                "--config",
+                "Release"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -90,7 +112,10 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", ".", "--config", "Debug"
+                "--build",
+                ".",
+                "--config",
+                "Debug"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -102,7 +127,10 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", ".", "--config", "Release"
+                "--build",
+                ".",
+                "--config",
+                "Release"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -114,7 +142,9 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DCMAKE_BUILD_TYPE=Debug", "-DBUILD_SHARED_LIBS=1"
+                "..",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DBUILD_SHARED_LIBS=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -126,7 +156,9 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "..", "-DCMAKE_BUILD_TYPE=Release", "-DBUILD_SHARED_LIBS=1"
+                "..",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DBUILD_SHARED_LIBS=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -138,7 +170,10 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", ".", "--target", "deps"
+                "--build",
+                ".",
+                "--target",
+                "deps"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -150,12 +185,13 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "."
+                "--build",
+                "."
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": []
-        },
+        }
     ]
 }
