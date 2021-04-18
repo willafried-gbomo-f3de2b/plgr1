@@ -126,7 +126,7 @@ target_link_libraries(main PRIVATE
 	matroska 
 	sqlite3
 	$<$<CONFIG:Debug>:libupnpd>
-	$<$<CONFIG:Reeasel>:libupnp>
+	$<$<CONFIG:Release>:libupnp>
 )
 else()
 endif()
