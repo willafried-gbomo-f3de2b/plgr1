@@ -1,11 +1,11 @@
 
 #include <matroska/FileKax.h>
 #include <sqlite3/sqlite3ext.h>
-#include <upnp/upnp.h>
 
-#ifdef WIN32
+#ifdef _WIN32
 #define UPNP_USE_MSVCPP
 #endif
+#include <upnp/upnp.h>
 
 #include <iostream>
 #include <string>

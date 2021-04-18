@@ -121,11 +121,15 @@ target_link_directories(main
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib64
 )
 
+if(MSVC)
 target_link_libraries(main PRIVATE 
 	matroska 
 	sqlite3
-	libupnpd
+	$<$<CONFIG:Debug>:libupnpd>
+	$<$<CONFIG:Reeasel>:libupnp>
 )
+else()
+endif()
 
 
 
