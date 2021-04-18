@@ -104,6 +104,11 @@ target_compile_features(main
 target_include_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/include
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/include
+
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/include/upnp
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/include/upnp
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/include/pthread
+	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/include/pthread
 )
 
 target_link_directories(main 
@@ -116,9 +121,10 @@ target_link_directories(main
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib64
 )
 
-target_link_libraries(main 
-	PRIVATE matroska 
+target_link_libraries(main PRIVATE 
+	matroska 
 	sqlite3
+	libupnpd
 )
 
 
