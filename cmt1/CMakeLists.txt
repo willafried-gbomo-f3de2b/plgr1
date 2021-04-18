@@ -118,6 +118,7 @@ target_link_directories(main
 
 target_link_libraries(main 
 	PRIVATE matroska 
+	sqlite3
 )
 
 
