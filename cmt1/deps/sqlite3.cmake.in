@@ -12,16 +12,15 @@ target_include_directories(sqlite3
     PUBLIC ${SA}
 )
 
-include(GNUInstallDirs)
-
-set (PHDR "
-    ${SA}/sqlite3.h
-    ${SA}/sqlite3ext.h
-    "
+target_compile_definitions(sqlite3
+    PRIVATE SQLITE_API=__declspec\(dllexport\)
 )
 
-set_target_properties(sqlite3 
-    PROPERTIES PUBLIC_HEADER ${PHDR}
+include(GNUInstallDirs)
+
+set (PHDR 
+    ${SA}/sqlite3.h
+    ${SA}/sqlite3ext.h
 )
 
 install(TARGETS sqlite3
@@ -30,3 +29,5 @@ install(TARGETS sqlite3
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
 )
+
+install(FILES ${PHDR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/sqlite3)
