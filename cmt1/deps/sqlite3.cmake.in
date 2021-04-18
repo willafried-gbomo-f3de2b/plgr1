@@ -12,9 +12,12 @@ target_include_directories(sqlite3
     PUBLIC ${SA}
 )
 
-target_compile_definitions(sqlite3
-    PRIVATE SQLITE_API=__declspec\(dllexport\)
-)
+if(MSVC)
+    target_compile_definitions(sqlite3
+        PRIVATE SQLITE_API=__declspec\(dllexport\)
+    )
+else()
+endif()
 
 include(GNUInstallDirs)
 
