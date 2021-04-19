@@ -1,7 +1,7 @@
 
 #include <matroska/FileKax.h>
 #include <sqlite3/sqlite3ext.h>
-
+#include <FLAC/all.h>
 #ifdef _WIN32
 #define UPNP_USE_MSVCPP
 #endif
@@ -22,5 +22,8 @@ int main(void)
 
     UpnpLib* upnplib = nullptr;
     UpnpInit2(&upnplib, nullptr, 0, nullptr);
+
+    auto fsd = FLAC__stream_decoder_new();
+    
 }
 

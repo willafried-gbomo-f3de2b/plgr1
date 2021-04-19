@@ -122,12 +122,13 @@ target_link_directories(main
 )
 
 if(MSVC)
-target_link_libraries(main PRIVATE 
-	matroska 
-	sqlite3
-	$<$<CONFIG:Debug>:libupnpd>
-	$<$<CONFIG:Release>:libupnp>
-)
+	target_link_libraries(main PRIVATE 
+		matroska 
+		FLAC 
+		sqlite3 
+		$<$<CONFIG:Debug>:libupnpd> 
+		$<$<CONFIG:Release>:libupnp> 
+	)
 else()
 endif()
 
