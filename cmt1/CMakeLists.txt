@@ -122,7 +122,7 @@ target_link_directories(main
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib64
 )
 
-if(DEPS_STATIC)
+if(NOT DEPS_STATIC)
 	if(MSVC)
 		target_link_libraries(main PRIVATE 
 			matroska 
