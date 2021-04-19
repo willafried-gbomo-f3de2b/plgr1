@@ -134,8 +134,7 @@ else()
 		matroska 
 		FLAC 
 		sqlite3 
-		$<$<CONFIG:Debug>:libupnpd> 
-		$<$<CONFIG:Release>:libupnp> 
+		upnp
 	)
 endif()
 
