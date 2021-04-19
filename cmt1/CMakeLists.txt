@@ -130,6 +130,13 @@ if(MSVC)
 		$<$<CONFIG:Release>:libupnp> 
 	)
 else()
+	target_link_libraries(main PRIVATE 
+		matroska 
+		FLAC 
+		sqlite3 
+		$<$<CONFIG:Debug>:libupnpd> 
+		$<$<CONFIG:Release>:libupnp> 
+	)
 endif()
 
 
