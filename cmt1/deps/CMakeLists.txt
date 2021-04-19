@@ -42,6 +42,12 @@ if(DEPS_BUILD)
 
 	include(clean-deps.cmake)
 
+	if(DEPS_STATIC)
+		set(BUILD_SHARED_LIBS 0)
+	else()
+		set(BUILD_SHARED_LIBS 1)
+	endif()
+
 	file(GLOB SUB "build-*.cmake")
 	foreach(ITEM ${SUB})
 		message(" processing: ${ITEM}")

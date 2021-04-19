@@ -89,6 +89,21 @@
             "problemMatcher": []
         },
         {
+            "label": "task-win-gen-with-deps-static-deps",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..",
+                "-DDEPS_BUILD=1",
+                "-DDEPS_STATIC=1",
+                "-DCRT_STATIC=0",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "task-win-deps-build-debug",
             "type": "shell",
             "command": "cmake",

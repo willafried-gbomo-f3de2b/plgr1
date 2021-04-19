@@ -5,6 +5,7 @@ project(proj1)
 # options
 option(DEPS_DOWNLOAD "" ON)
 option(DEPS_BUILD "" ON)
+option(DEPS_STATIC "" OFF)
 option(CRT_STATIC "" OFF)
 
 set(ARCH "")
@@ -121,21 +122,47 @@ target_link_directories(main
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/lib64
 )
 
-if(MSVC)
-	target_link_libraries(main PRIVATE 
-		matroska 
-		FLAC 
-		sqlite3 
-		$<$<CONFIG:Debug>:libupnpd> 
-		$<$<CONFIG:Release>:libupnp> 
-	)
+if(DEPS_STATIC)
+	if(MSVC)
+		target_link_libraries(main PRIVATE 
+			matroska 
+			FLAC 
+			sqlite3 
+			$<$<CONFIG:Debug>:libupnpd> 
+			$<$<CONFIG:Release>:libupnp> 
+		)
+	else()
+		target_link_libraries(main PRIVATE 
+			matroska 
+			FLAC 
+			sqlite3 
+			upnp
+		)
+	endif()
 else()
-	target_link_libraries(main PRIVATE 
-		matroska 
-		FLAC 
-		sqlite3 
-		upnp
-	)
+	if(MSVC)
+		target_link_libraries(main PRIVATE 
+			ebml
+			matroska 
+			FLAC 
+			sqlite3 
+			$<$<CONFIG:Debug>:pthreadVC3sd> 
+			$<$<CONFIG:Release>:pthreadVC3s> 
+			$<$<CONFIG:Debug>:ixmlsd> 
+			$<$<CONFIG:Release>:ixmls> 
+			$<$<CONFIG:Debug>:libupnpsd> 
+			$<$<CONFIG:Release>:libupnps> 
+		)
+	else()
+		target_link_libraries(main PRIVATE 
+			ebml 
+			matroska 
+			FLAC 
+			sqlite3 
+			ixml
+			upnp
+		)
+	endif()
 endif()
 
 
