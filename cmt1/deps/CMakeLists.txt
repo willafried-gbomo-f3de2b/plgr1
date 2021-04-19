@@ -40,6 +40,11 @@ if(DEPS_BUILD)
 	file(MAKE_DIRECTORY ${BLDDIR})
 	file(REMOVE_RECURSE ${DSTDIR})
 
+	add_custom_command(TARGET deps 
+		COMMAND ${CMAKE_COMMAND} -E remove_directory ${DSTDIR}
+		WORKING_DIRECTORY ${BLDDIR}
+	)
+
 	file(GLOB SUB "build-*.cmake")
 	foreach(ITEM ${SUB})
 		message(" processing: ${ITEM}")
