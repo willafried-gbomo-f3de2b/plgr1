@@ -38,6 +38,7 @@ endif()
 if(DEPS_BUILD)
 	message("processing deps...")
 	file(MAKE_DIRECTORY ${BLDDIR})
+	file(REMOVE_RECURSE ${DSTDIR})
 
 	file(GLOB SUB "build-*.cmake")
 	foreach(ITEM ${SUB})
