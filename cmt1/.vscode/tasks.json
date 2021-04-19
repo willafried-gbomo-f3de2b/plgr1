@@ -44,7 +44,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-gen",
+            "label": "task-win-gen-wo-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -58,7 +58,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-gen-x64",
+            "label": "task-win-gen-wo-deps-x64",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -67,6 +67,21 @@
                 "-DDEPS_BUILD=0",
                 "-A",
                 "x64"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "task-win-gen-with-deps-static-crt",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=1",
+                "-DCRT_STATIC=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
