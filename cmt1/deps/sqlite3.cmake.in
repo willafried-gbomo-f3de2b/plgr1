@@ -17,12 +17,14 @@ if(MSVC)
         PRIVATE SQLITE_API=__declspec\(dllexport\)
     )
 else()
-
+    target_link_libraries(sqlite3 
+        PRIVATE dl
+    )
 endif()
 
 include(GNUInstallDirs)
 
-set (PHDR 
+set(PHDR 
     ${SA}/sqlite3.h
     ${SA}/sqlite3ext.h
 )
