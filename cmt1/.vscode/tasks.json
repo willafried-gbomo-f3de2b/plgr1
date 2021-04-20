@@ -25,7 +25,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            },
         },
         {
             "label": "task-win-gen-with-deps-x64",
@@ -41,7 +46,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            },
         },
         {
             "label": "task-win-gen-wo-deps",
@@ -55,7 +65,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            },
         },
         {
             "label": "task-win-gen-wo-deps-x64",
@@ -71,7 +86,13 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            },
+            "group": "none",
         },
         {
             "label": "task-win-gen-with-deps-static-crt",
@@ -133,7 +154,8 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": "build",
         },
         {
             "label": "task-win-deps-build-release",
