@@ -14,7 +14,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-gen-with-deps",
+            "label": "task[win]: generate-with-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -33,7 +33,7 @@
             }
         },
         {
-            "label": "task-win-gen-with-deps-x64",
+            "label": "task[win]: generate-with-deps-x64",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -54,7 +54,7 @@
             }
         },
         {
-            "label": "task-win-gen-wo-deps",
+            "label": "task[win]: generate-wo-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -73,7 +73,7 @@
             }
         },
         {
-            "label": "task-win-gen-wo-deps-x64",
+            "label": "task[win]: generate-wo-deps-x64",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -95,7 +95,7 @@
             "group": "none"
         },
         {
-            "label": "task-win-gen-with-deps-static-crt",
+            "label": "task[win]: generate-with-deps-static-crt",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -110,7 +110,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-gen-with-deps-static-deps",
+            "label": "task[win]: generate-with-deps-static-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -125,7 +125,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-gen-with-deps-static-all",
+            "label": "task[win]: generate-with-deps-static-all",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -140,7 +140,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-deps-build-debug",
+            "label": "task[win]: build-deps-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -155,7 +155,12 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
-            "group": "build"
+            "group": "build",
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
             "label": "task-win-deps-build-release",
@@ -175,7 +180,7 @@
             "problemMatcher": []
         },
         {
-            "label": "task-win-build-debug",
+            "label": "task[win]: build-main-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -187,7 +192,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
             "label": "task-win-build-release",
@@ -265,10 +275,10 @@
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "task-win-gen-with-deps",
-                "task-win-deps-build-debug",
-                "task-win-gen-wo-deps",
-                "task-win-build-debug"
+                "task[win]: generate-with-deps",
+                "task[win]: build-deps-debug",
+                "task[win]: generate-wo-deps",
+                "task[win]: build-main-debug"
             ],
             "problemMatcher": []
         }
