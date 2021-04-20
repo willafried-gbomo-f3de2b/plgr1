@@ -10,12 +10,12 @@
 #define UPNP_USE_MSVCPP
 #endif
 
-#define DEPS_STATIC 1
-
 #if defined DEPS_STATIC && DEPS_STATIC
 #define FLAC__NO_DLL
+#define UPNP_STATIC_LIB
 #endif
 #include <FLAC/all.h>
-#undef FLAC__NO_DLL
-
 #include <upnp/upnp.h>
+/* req: Ws2_32.lib, Iphlpapi.lib */
+#undef FLAC__NO_DLL
+#undef UPNP_STATIC_LIB

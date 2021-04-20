@@ -102,6 +102,10 @@ target_compile_features(main
 	PRIVATE cxx_std_17
 )
 
+target_compile_definitions(main 
+	PRIVATE DEPS_STATIC=${DEPS_STATIC}
+)
+
 target_include_directories(main 
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/include
 	PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/deps/out/$<CONFIG>/include
@@ -152,6 +156,8 @@ else()
 			$<$<CONFIG:Release>:ixmls> 
 			$<$<CONFIG:Debug>:libupnpsd> 
 			$<$<CONFIG:Release>:libupnps> 
+			Ws2_32
+			Iphlpapi
 		)
 	else()
 		target_link_libraries(main PRIVATE 
