@@ -51,7 +51,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "task-lnx-build",
+            "preLaunchTask": "task[lnx]: build-main",
         },
     ]
 }
