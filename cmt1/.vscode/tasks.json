@@ -372,6 +372,41 @@
                 "task[lnx]: build-main",
             ],
             "problemMatcher": []
+        },
+        // input
+        {
+            "label": "task[win]: build-deps-select",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                ".",
+                "--target",
+                "deps",
+                "--config",
+                "${input:input-config}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+    ],
+    "inputs": [
+        {
+            "id": "input-config",
+            "type": "pickString",
+            "options": [
+                "Debug", "Release"
+            ],
+            "description": "select build type"
         }
-    ]
+    ],
+    
 }
