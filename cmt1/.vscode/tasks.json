@@ -13,6 +13,7 @@
             },
             "problemMatcher": []
         },
+        // windows generate
         {
             "label": "task[win]: generate-with-deps",
             "type": "shell",
@@ -139,6 +140,7 @@
             },
             "problemMatcher": []
         },
+        // windows build
         {
             "label": "task[win]: build-deps-debug",
             "type": "shell",
@@ -214,8 +216,9 @@
             },
             "problemMatcher": []
         },
+        // linux generate
         {
-            "label": "task-lnx-gen-debug",
+            "label": "task[lnx]: generate-with-deps-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -226,7 +229,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
             "label": "task-lnx-gen-release",
@@ -243,7 +251,28 @@
             "problemMatcher": []
         },
         {
-            "label": "task-lnx-deps-build",
+            "label": "task[lnx]: generate-wo-deps-debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=0"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        // linux build
+        {
+            "label": "task[lnx]: build-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -255,10 +284,15 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
-            "label": "task-lnx-build",
+            "label": "task[lnx]: build-main",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -268,8 +302,14 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
+        // windows compound
         {
             "label": "task[win]: compound-debug",
             "type": "shell",
@@ -279,6 +319,19 @@
                 "task[win]: build-deps-debug",
                 "task[win]: generate-wo-deps",
                 "task[win]: build-main-debug"
+            ],
+            "problemMatcher": []
+        },
+        //linux compound
+        {
+            "label": "task[lnx]: compound-debug",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "task[lnx]: generate-with-deps-debug",
+                "task[lnx]: build-deps",
+                "task[lnx]: generate-wo-deps-debug",
+                "task[lnx]: build-main",
             ],
             "problemMatcher": []
         }
