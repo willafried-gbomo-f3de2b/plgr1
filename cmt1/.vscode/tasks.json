@@ -30,7 +30,7 @@
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            },
+            }
         },
         {
             "label": "task-win-gen-with-deps-x64",
@@ -51,7 +51,7 @@
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            },
+            }
         },
         {
             "label": "task-win-gen-wo-deps",
@@ -70,7 +70,7 @@
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            },
+            }
         },
         {
             "label": "task-win-gen-wo-deps-x64",
@@ -92,7 +92,7 @@
                 "panel": "dedicated",
                 "clear": true
             },
-            "group": "none",
+            "group": "none"
         },
         {
             "label": "task-win-gen-with-deps-static-crt",
@@ -117,7 +117,7 @@
                 "..",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
-                "-DCRT_STATIC=0",
+                "-DCRT_STATIC=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -132,7 +132,7 @@
                 "..",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
-                "-DCRT_STATIC=1",
+                "-DCRT_STATIC=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -155,7 +155,7 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "task-win-deps-build-release",
@@ -258,6 +258,18 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
+            "problemMatcher": []
+        },
+        {
+            "label": "task[win]: compound-debug",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "task-win-gen-with-deps",
+                "task-win-deps-build-debug",
+                "task-win-gen-wo-deps",
+                "task-win-build-debug"
+            ],
             "problemMatcher": []
         }
     ]
