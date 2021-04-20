@@ -93,7 +93,6 @@
                 "panel": "dedicated",
                 "clear": true
             },
-            "group": "none"
         },
         {
             "label": "task[win]: generate-with-deps-static-crt",
@@ -165,7 +164,7 @@
             }
         },
         {
-            "label": "task-win-deps-build-release",
+            "label": "task[win]: build-deps-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -179,7 +178,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
             "label": "task[win]: build-main-debug",
@@ -202,7 +206,7 @@
             }
         },
         {
-            "label": "task-win-build-release",
+            "label": "task[win]: build-main-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -214,7 +218,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         // linux generate
         {
@@ -237,7 +246,7 @@
             }
         },
         {
-            "label": "task-lnx-gen-release",
+            "label": "task[lnx]: generate-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -248,7 +257,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
             "label": "task[lnx]: generate-wo-deps-debug",
@@ -311,7 +325,7 @@
         },
         // windows compound
         {
-            "label": "task[win]: compound-debug",
+            "label": "task[win]: <compound> debug",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
@@ -322,9 +336,33 @@
             ],
             "problemMatcher": []
         },
+        {
+            "label": "task[win]: <compound> release",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "task[win]: generate-with-deps",
+                "task[win]: build-deps-release",
+                "task[win]: generate-wo-deps",
+                "task[win]: build-main-release"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "task[win]: <compound> debug-x64",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "task[win]: generate-with-deps-x64",
+                "task[win]: build-deps-debug",
+                "task[win]: generate-wo-deps-x64",
+                "task[win]: build-main-debug"
+            ],
+            "problemMatcher": []
+        },
         //linux compound
         {
-            "label": "task[lnx]: compound-debug",
+            "label": "task[lnx]: <compound> debug",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [

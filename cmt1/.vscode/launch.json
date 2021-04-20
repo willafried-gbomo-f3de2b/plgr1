@@ -15,7 +15,7 @@
                 }
             ],
             "console": "integratedTerminal",
-            "preLaunchTask": "task-win-build-debug",
+            "preLaunchTask": "task[win]: build-main-debug",
         },
         {
             "name": "release",
@@ -31,10 +31,10 @@
                 }
             ],
             "console": "externalTerminal",
-            "preLaunchTask": "task-win-build-release",
+            "preLaunchTask": "task[win]: build-main-release",
         },
         {
-            "name": "gdb-debug",
+            "name": "gdb-run",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/main",
