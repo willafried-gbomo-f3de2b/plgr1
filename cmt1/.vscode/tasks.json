@@ -37,7 +37,7 @@
         },
         // windows generate
         {
-            "label": "task[win]: generate-with-deps",
+            "label": "task [win]: generate-with-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -56,7 +56,7 @@
             },
         },
         {
-            "label": "task[win]: generate-with-deps-x64",
+            "label": "task [win]: generate-with-deps-x64",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -77,7 +77,7 @@
             }
         },
         {
-            "label": "task[win]: generate-wo-deps",
+            "label": "task [win]: generate-wo-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -96,7 +96,7 @@
             }
         },
         {
-            "label": "task[win]: generate-wo-deps-x64",
+            "label": "task [win]: generate-wo-deps-x64",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -117,7 +117,7 @@
             },
         },
         {
-            "label": "task[win]: generate-with-deps-static-crt",
+            "label": "task [win]: generate-with-deps-static-crt",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -132,11 +132,12 @@
             "problemMatcher": []
         },
         {
-            "label": "task[win]: generate-with-deps-static-deps",
+            "label": "task [win]: generate-with-deps-static-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "..",
+                "-DBUILD_SHARED_LIBS=0",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
                 "-DCRT_STATIC=0"
@@ -147,11 +148,12 @@
             "problemMatcher": []
         },
         {
-            "label": "task[win]: generate-with-deps-static-all",
+            "label": "task [win]: generate-with-deps-static-all",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "..",
+                "-DBUILD_SHARED_LIBS=0",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
                 "-DCRT_STATIC=1"
@@ -163,7 +165,7 @@
         },
         // windows build
         {
-            "label": "task[win]: build-deps-debug",
+            "label": "task [win]: build-deps-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -186,7 +188,7 @@
             },
         },
         {
-            "label": "task[win]: build-deps-release",
+            "label": "task [win]: build-deps-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -209,7 +211,7 @@
             }
         },
         {
-            "label": "task[win]: build-main-debug",
+            "label": "task [win]: build-main-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -230,7 +232,7 @@
             }
         },
         {
-            "label": "task[win]: build-main-release",
+            "label": "task [win]: build-main-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -252,7 +254,7 @@
         },
         // linux generate
         {
-            "label": "task[lnx]: generate-with-deps-debug",
+            "label": "task [lnx]: generate-with-deps-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -271,7 +273,7 @@
             }
         },
         {
-            "label": "task[lnx]: generate-release",
+            "label": "task [lnx]: generate-release",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -290,7 +292,7 @@
             }
         },
         {
-            "label": "task[lnx]: generate-wo-deps-debug",
+            "label": "task [lnx]: generate-wo-deps-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -311,7 +313,7 @@
         },
         // linux build
         {
-            "label": "task[lnx]: build-deps",
+            "label": "task [lnx]: build-deps",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -332,7 +334,7 @@
             }
         },
         {
-            "label": "task[lnx]: build-main",
+            "label": "task [lnx]: build-main",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -352,61 +354,87 @@
         },
         // windows compound
         {
-            "label": "task[win]: <compound> debug",
+            "label": "task [win]: <auto> debug",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "task[win]: generate-with-deps",
-                "task[win]: build-deps-debug",
-                "task[win]: generate-wo-deps",
-                "task[win]: build-main-debug"
+                "task [win]: generate-with-deps",
+                "task [win]: build-deps-debug",
+                "task [win]: generate-wo-deps",
+                "task [win]: build-main-debug"
             ],
             "problemMatcher": [],
             "group": "build",
         },
         {
-            "label": "task[win]: <compound> release",
+            "label": "task [win]: <auto> release",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "task[win]: generate-with-deps",
-                "task[win]: build-deps-release",
-                "task[win]: generate-wo-deps",
-                "task[win]: build-main-release"
+                "task [win]: generate-with-deps",
+                "task [win]: build-deps-release",
+                "task [win]: generate-wo-deps",
+                "task [win]: build-main-release"
             ],
             "problemMatcher": [],
             "group": "build",
         },
         {
-            "label": "task[win]: <compound> debug-x64",
+            "label": "task [win]: <auto> debug-x64",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "task[win]: generate-with-deps-x64",
-                "task[win]: build-deps-debug",
-                "task[win]: generate-wo-deps-x64",
-                "task[win]: build-main-debug"
+                "task [win]: generate-with-deps-x64",
+                "task [win]: build-deps-debug",
+                "task [win]: generate-wo-deps-x64",
+                "task [win]: build-main-debug"
+            ],
+            "problemMatcher": [],
+            "group": "build",
+        },
+        {
+            "label": "task [win]: <auto> release-x64",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "task [win]: generate-with-deps-x64",
+                "task [win]: build-deps-release",
+                "task [win]: generate-wo-deps-x64",
+                "task [win]: build-main-release"
             ],
             "problemMatcher": [],
             "group": "build",
         },
         //linux compound
         {
-            "label": "task[lnx]: <compound> debug",
+            "label": "task [lnx]: <auto> debug",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "task[lnx]: generate-with-deps-debug",
-                "task[lnx]: build-deps",
-                "task[lnx]: generate-wo-deps-debug",
-                "task[lnx]: build-main",
+                "task [lnx]: generate-with-deps-debug",
+                "task [lnx]: build-deps",
+                "task [lnx]: generate-wo-deps-debug",
+                "task [lnx]: build-main",
+            ],
+            "problemMatcher": [],
+            "group": "build",
+        },
+        {
+            "label": "task [lnx]: <auto> release",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "task [lnx]: generate-with-deps-release",
+                "task [lnx]: build-deps",
+                "task [lnx]: generate-wo-deps-release",
+                "task [lnx]: build-main",
             ],
             "problemMatcher": [],
             "group": "build",
         },
         // input
         {
-            "label": "task[win]: build-deps-select",
+            "label": "task [win]: build-deps-select",
             "type": "shell",
             "command": "cmake",
             "args": [
