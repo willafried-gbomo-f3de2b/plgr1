@@ -15,7 +15,7 @@
                 }
             ],
             "console": "integratedTerminal",
-            "preLaunchTask": "task[win]: build-main-debug",
+            "preLaunchTask": "task [win]: build-main-debug",
         },
         {
             "name": "release",
@@ -31,7 +31,7 @@
                 }
             ],
             "console": "externalTerminal",
-            "preLaunchTask": "task[win]: build-main-release",
+            "preLaunchTask": "task [win]: build-main-release",
         },
         {
             "name": "gdb-run",
@@ -51,7 +51,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "task[lnx]: build-main",
+            "preLaunchTask": "task [lnx]: build-main",
         },
     ]
 }
