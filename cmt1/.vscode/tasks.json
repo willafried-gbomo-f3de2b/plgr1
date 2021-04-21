@@ -2,6 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "git-set-skip",
+            "type": "shell",
+            "command": "git",
+            "args": [
+                "update-index", "--skip-worktree", "*.code-workspace"
+            ],
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
             "label": "task-mkdir",
             "type": "shell",
             "command": "mkdir",
