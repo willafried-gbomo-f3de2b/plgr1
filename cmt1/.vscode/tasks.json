@@ -7,13 +7,13 @@
             "windows":{
                 "command": "copy",
                 "args": [
-                    ".vscode/cmt1.code-workspace.in", "cmt1.code-workspace"
+                    ".\\.vscode\\cmt1.code-workspace.in", ".\\cmt1.code-workspace"
                 ]
             },
             "linux": {
                 "command": "cp",
                 "args": [
-                    ".vscode/cmt1.code-workspace.in", "cmt1.code-workspace"
+                    "./.vscode/cmt1.code-workspace.in", "./cmt1.code-workspace"
                 ]
             },
             "options": {
