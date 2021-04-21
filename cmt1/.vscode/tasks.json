@@ -4,10 +4,21 @@
         {
             "label": "git-set-skip",
             "type": "shell",
-            "command": "git",
-            "args": [
-                "update-index", "--skip-worktree", "*.code-workspace"
-            ],
+            "windows":{
+                "command": "copy",
+                "args": [
+                    ".vscode/cmt1.code-workspace.in", "cmt1.code-workspace"
+                ]
+            },
+            "linux": {
+                "command": "cp",
+                "args": [
+                    ".vscode/cmt1.code-workspace.in", "cmt1.code-workspace"
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "runOptions": {
                 "runOn": "folderOpen"
             }
