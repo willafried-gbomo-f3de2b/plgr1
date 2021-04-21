@@ -35,14 +35,14 @@
                 "-DDEPS_BUILD=1"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/build"
+                "cwd": "${workspaceFolder}/build",
             },
             "problemMatcher": [],
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            }
+            },
         },
         {
             "label": "task[win]: generate-with-deps-x64",
@@ -172,7 +172,7 @@
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            }
+            },
         },
         {
             "label": "task[win]: build-deps-release",
@@ -190,6 +190,7 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
+            "group": "build",
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
@@ -210,6 +211,7 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
+            "group": "build",
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
@@ -230,6 +232,7 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
+            "group": "build",
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
@@ -310,6 +313,7 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
+            "group": "build",
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
@@ -328,6 +332,7 @@
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
+            "group": "build",
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
@@ -345,7 +350,8 @@
                 "task[win]: generate-wo-deps",
                 "task[win]: build-main-debug"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": "build",
         },
         {
             "label": "task[win]: <compound> release",
@@ -357,7 +363,8 @@
                 "task[win]: generate-wo-deps",
                 "task[win]: build-main-release"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": "build",
         },
         {
             "label": "task[win]: <compound> debug-x64",
@@ -369,7 +376,8 @@
                 "task[win]: generate-wo-deps-x64",
                 "task[win]: build-main-debug"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": "build",
         },
         //linux compound
         {
@@ -382,7 +390,54 @@
                 "task[lnx]: generate-wo-deps-debug",
                 "task[lnx]: build-main",
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": "build",
+        },
+        // input
+        {
+            "label": "task[win]: build-deps-select",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                ".",
+                "--target",
+                "deps",
+                "--config",
+                "${input:input-config}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "echo ${input:inp-test}"
         }
-    ]
+    ],
+    "inputs": [
+        {
+            "id": "input-config",
+            "type": "pickString",
+            "options": [
+                "Debug", "Release"
+            ],
+            "description": "select build type"
+        },
+        {
+            "id": "inp-test",
+            "command": "git.fetchAll",
+            "args": "",
+            "type": "command"
+        }
+    ],
+    
 }
