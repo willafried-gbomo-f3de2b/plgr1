@@ -43,7 +43,9 @@
             "args": [
                 "..",
                 "-DBUILD_SHARED_LIBS=1",
-                "-DDEPS_BUILD=1"
+                "-DDEPS_BUILD=1",
+                "-DDEPS_STATIC=0",
+                "-DCRT_STATIC=0",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build",
@@ -63,6 +65,8 @@
                 "..",
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=1",
+                "-DDEPS_STATIC=0",
+                "-DCRT_STATIC=0",
                 "-A",
                 "x64"
             ],
@@ -83,7 +87,8 @@
             "args": [
                 "..",
                 "-DBUILD_SHARED_LIBS=1",
-                "-DDEPS_BUILD=0"
+                "-DDEPS_BUILD=0",
+                "-DCRT_STATIC=0",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -103,6 +108,7 @@
                 "..",
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=0",
+                "-DCRT_STATIC=0",
                 "-A",
                 "x64"
             ],
@@ -124,7 +130,8 @@
                 "..",
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=1",
-                "-DCRT_STATIC=1"
+                "-DDEPS_STATIC=0",
+                "-DCRT_STATIC=1",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -140,7 +147,7 @@
                 "-DBUILD_SHARED_LIBS=0",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
-                "-DCRT_STATIC=0"
+                "-DCRT_STATIC=0",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -156,7 +163,7 @@
                 "-DBUILD_SHARED_LIBS=0",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
-                "-DCRT_STATIC=1"
+                "-DCRT_STATIC=1",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
