@@ -7,7 +7,7 @@
             "windows":{
                 "command": "xcopy",
                 "args": [
-                    "/d", "/y", "/q", ".\\.vscode\\cmt1.code-workspace", ".\\cmt1.code-workspace"
+                    "/d", "/y", "/q", ".\\.vscode\\cmt1.code-workspace", ".\\"
                 ]
             },
             "linux": {
