@@ -259,8 +259,10 @@
             "command": "cmake",
             "args": [
                 "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=1",
+                "-DDEPS_STATIC=0",
                 "-DCMAKE_BUILD_TYPE=Debug",
-                "-DBUILD_SHARED_LIBS=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -273,13 +275,15 @@
             }
         },
         {
-            "label": "task [lnx]: generate-release",
+            "label": "task [lnx]: generate-with-deps-release",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "..",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=1",
+                "-DDEPS_STATIC=0",
                 "-DCMAKE_BUILD_TYPE=Release",
-                "-DBUILD_SHARED_LIBS=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -299,7 +303,29 @@
                 "..",
                 "-DCMAKE_BUILD_TYPE=Debug",
                 "-DBUILD_SHARED_LIBS=1",
-                "-DDEPS_BUILD=0"
+                "-DDEPS_BUILD=0",
+                "-DDEPS_STATIC=0",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "task [lnx]: generate-wo-deps-release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "..",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DBUILD_SHARED_LIBS=1",
+                "-DDEPS_BUILD=0",
+                "-DDEPS_STATIC=0",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
