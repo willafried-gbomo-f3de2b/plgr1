@@ -5,15 +5,15 @@
             "label": "copy-workspace-file-on-open",
             "type": "shell",
             "windows":{
-                "command": "copy",
+                "command": "xcopy",
                 "args": [
-                    ".\\.vscode\\cmt1.code-workspace", ".\\cmt1.code-workspace"
+                    "/d", "/y", "/q", ".\\.vscode\\cmt1.code-workspace", ".\\cmt1.code-workspace"
                 ]
             },
             "linux": {
                 "command": "cp",
                 "args": [
-                    "./.vscode/cmt1.code-workspace", "./cmt1.code-workspace"
+                    "-u", "./.vscode/cmt1.code-workspace", "./cmt1.code-workspace"
                 ]
             },
             "options": {
