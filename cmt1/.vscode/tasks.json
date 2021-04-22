@@ -4,16 +4,22 @@
         {
             "label": "copy-workspace-file-on-open",
             "type": "shell",
-            "windows":{
+            "windows": {
                 "command": "xcopy",
                 "args": [
-                    "/d", "/y", "/q", ".\\.vscode\\cmt1.code-workspace", ".\\"
+                    "/d",
+                    "/y",
+                    "/q",
+                    ".\\.vscode\\cmt1.code-workspace",
+                    ".\\"
                 ]
             },
             "linux": {
                 "command": "cp",
                 "args": [
-                    "-u", "./.vscode/cmt1.code-workspace", "./cmt1.code-workspace"
+                    "-u",
+                    "./.vscode/cmt1.code-workspace",
+                    "./cmt1.code-workspace"
                 ]
             },
             "options": {
@@ -493,6 +499,13 @@
             "label": "test",
             "type": "shell",
             "command": "echo ${input:inp-test}"
+        },
+        {
+            "label": "name",
+            "command": "${command:workbench.action.debug.selectandstart}",
+            "args": [
+                "debug"
+            ]
         }
     ],
     "inputs": [
@@ -500,16 +513,15 @@
             "id": "input-config",
             "type": "pickString",
             "options": [
-                "Debug", "Release"
+                "Debug",
+                "Release"
             ],
             "description": "select build type"
         },
         {
             "id": "inp-test",
-            "command": "git.fetchAll",
-            "args": "",
+            "command": "workbench.action.debug.selectandstart",
             "type": "command"
         }
     ],
-    
 }
