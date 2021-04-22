@@ -82,7 +82,8 @@ message(" -> CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
 
 # main target sources
 set(SOURCES 
-	main.cpp
+	src/main.cpp
+	
 )
 
 # declare main target
