@@ -1,5 +1,5 @@
 # thirdparty/libmatroska
 
-add_dependencies(deps deps-libmatroska)
-add_dependencies(deps-libmatroska deps-libebml)
-add_dependencies(deps-libmatroska clean-deps)
+add_dependencies(deps dep-libmatroska)
+add_dependencies(dep-libmatroska dep-libebml)
+add_dependencies(dep-libmatroska clean-deps)

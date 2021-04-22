@@ -1,11 +1,11 @@
 # thirdparty/pupnp
 
-add_dependencies(deps deps-pupnp)
+add_dependencies(deps dep-pupnp)
 
 if(MSVC)
-    add_dependencies(deps-pupnp deps-pthreads4w)
+    add_dependencies(dep-pupnp dep-pthreads4w)
 endif()
 
-add_dependencies(deps-pupnp clean-deps)
+add_dependencies(dep-pupnp clean-deps)
 
 

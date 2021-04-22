@@ -1,6 +1,6 @@
-# thirdparty/deps-flac
+# thirdparty/dep-flac
 
-set(TARGETNAME "deps-flac")
+set(TARGETNAME "dep-flac")
 
 message(" > adding custom target ${TARGETNAME} ...")
 add_custom_target(${TARGETNAME})

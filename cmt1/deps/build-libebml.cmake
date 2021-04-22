@@ -1,6 +1,6 @@
-# thirdparty/deps-libebml
+# thirdparty/dep-libebml
 
-set(TARGETNAME "deps-libebml")
+set(TARGETNAME "dep-libebml")
 
 message(" > adding custom target ${TARGETNAME} ...")
 add_custom_target(${TARGETNAME})

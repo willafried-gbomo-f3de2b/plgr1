@@ -1,6 +1,6 @@
-# thirdparty/deps-libmatroska
+# thirdparty/dep-libmatroska
 
-set(TARGETNAME "deps-libmatroska")
+set(TARGETNAME "dep-libmatroska")
 
 include(GNUInstallDirs)
 

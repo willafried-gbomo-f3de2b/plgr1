@@ -1,14 +1,14 @@
 # dependencies
 
 # deps/thirdparty/flac
-add_dependencies(deps deps-flac)
-add_dependencies(deps-flac clean-deps)
+add_dependencies(deps dep-flac)
+add_dependencies(dep-flac clean-deps)
 
 # deps/thirdparty/libebml
-add_dependencies(deps deps-libebml)
-add_dependencies(deps-libebml clean-deps)
+add_dependencies(deps dep-libebml)
+add_dependencies(dep-libebml clean-deps)
 
 # deps/thirdparty/sqlite3
-add_dependencies(deps deps-sqlite3)
-add_dependencies(deps-sqlite3 clean-deps)
+add_dependencies(deps dep-sqlite3)
+add_dependencies(dep-sqlite3 clean-deps)
 

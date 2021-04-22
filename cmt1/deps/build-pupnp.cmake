@@ -1,6 +1,6 @@
-# thirdparty/deps-pupnp
+# thirdparty/dep-pupnp
 
-set(TARGETNAME "deps-pupnp")
+set(TARGETNAME "dep-pupnp")
 
 include(GNUInstallDirs)
 

@@ -1,7 +1,7 @@
 # thirdparty/pthreads4w
 
 if(MSVC)
-    add_dependencies(deps deps-pthreads4w)
-    add_dependencies(deps-pthreads4w clean-deps)
+    add_dependencies(deps dep-pthreads4w)
+    add_dependencies(dep-pthreads4w clean-deps)
 endif()
 

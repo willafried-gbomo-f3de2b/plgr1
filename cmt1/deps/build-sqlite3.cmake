@@ -1,9 +1,9 @@
-# thirdparty/deps-sqlite3
+# thirdparty/dep-sqlite3
 
-set(TARGETNAME "deps-sqlite3")
+set(TARGETNAME "dep-sqlite3")
 
 message(" > adding custom target ${TARGETNAME} ...")
-add_custom_target(deps-sqlite3)
+add_custom_target(dep-sqlite3)
 
 if(MSVC)
 	set(CFLAG "-D CMAKE_C_FLAGS=\"${CMAKE_C_FLAGS}\" -D CMAKE_C_FLAGS_DEBUG=\"${CMAKE_C_FLAGS_DEBUG}\" -D CMAKE_C_FLAGS_RELEASE=\"${CMAKE_C_FLAGS_RELEASE}\"")

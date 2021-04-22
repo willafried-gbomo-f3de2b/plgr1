@@ -1,8 +1,8 @@
-# thirdparty/deps-pthreads4w
+# thirdparty/dep-pthreads4w
 
 if(MSVC)
 
-	set(TARGETNAME "deps-pthreads4w")
+	set(TARGETNAME "dep-pthreads4w")
 
 	include(GNUInstallDirs)
 
