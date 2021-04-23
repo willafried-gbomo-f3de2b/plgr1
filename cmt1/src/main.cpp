@@ -35,7 +35,7 @@ int main(void)
 
     UpnpLog *upnplog = UpnpLog_new();
     UpnpInitLog(upnplog);
-    UpnpSetLogLevel(upnplog, UPNP_INFO);
+    UpnpSetLogLevel(upnplog, UPNP_ERROR);
     UpnpSetLogFileName(upnplog, logname.c_str());
     UpnpLib *upnplib = nullptr;
     UpnpInit2(&upnplib, 
