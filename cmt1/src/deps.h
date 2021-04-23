@@ -16,6 +16,7 @@
 #endif
 #include <FLAC/all.h>
 #include <upnp/upnp.h>
+#include <upnp/UpnpLog.h>
 /* req: Ws2_32.lib, Iphlpapi.lib */
 #undef FLAC__NO_DLL
 #undef UPNP_STATIC_LIB
