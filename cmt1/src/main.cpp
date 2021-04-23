@@ -1,4 +1,4 @@
-
+﻿
 #include "deps.h"
 
 #include <iostream>
@@ -15,7 +15,9 @@ int main(void)
     sqlite3_initialize();
 
     UpnpLib* upnplib = nullptr;
-    UpnpInit2(&upnplib, nullptr, 0, nullptr);
+    std::string ifname = "VPN 第二";
+    std::string logname = "pupnp1.log";
+    UpnpInit2(&upnplib, ifname.c_str(), 0, logname.c_str());
 
     auto fsd = FLAC__stream_decoder_new();
     
