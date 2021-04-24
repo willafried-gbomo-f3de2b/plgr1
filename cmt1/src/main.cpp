@@ -49,9 +49,5 @@ int main(void)
 
     UpnpFinish(upnplib);
 
-<<<<<<< HEAD
-    cout << "main(): end." << endl;
-=======
     cout << "main()::end." << endl;
->>>>>>> origin/master
 }
