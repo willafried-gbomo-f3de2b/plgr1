@@ -46,5 +46,5 @@ int main(void)
 
     UpnpFinish(upnplib);
 
-    cout << "main()::end." << endl;
+    cout << "main(): end." << endl;
 }
