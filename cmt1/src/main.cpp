@@ -25,7 +25,8 @@ int main(void)
     fs.open("./nw-name.txt", std::ios::in | std::ios::binary);
     if (!fs.is_open())
     {
-        cout << "err: cannot open file ./nm-name.txt" << endl;
+        //cout << "err: cannot open file ./nm-name.txt" << endl;
+        cout << "file not found: ./nm-name.txt" << endl;
     }
     else
     {
