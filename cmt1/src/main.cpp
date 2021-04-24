@@ -9,7 +9,7 @@ using std::cout, std::endl;
 
 int main(void)
 {
-    cout << "main(): start." << endl;
+    cout << "main()::start." << endl;
 
     const char *locstr = setlocale(LC_ALL, "");
     cout << "locale: " << locstr << endl;
@@ -49,5 +49,9 @@ int main(void)
 
     UpnpFinish(upnplib);
 
+<<<<<<< HEAD
     cout << "main(): end." << endl;
+=======
+    cout << "main()::end." << endl;
+>>>>>>> origin/master
 }
