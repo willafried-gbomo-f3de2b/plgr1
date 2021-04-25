@@ -9,7 +9,7 @@ using std::cout, std::endl;
 
 int main(void)
 {
-    cout << "main()::start." << endl;
+    cout << "main()::start..." << endl;
 
     const char *locstr = setlocale(LC_ALL, "");
     cout << "locale: " << locstr << endl;
