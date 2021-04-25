@@ -5,7 +5,6 @@
 #include <sqlite3/sqlite3ext.h>
 
 
-
 #ifdef _WIN32
 #define UPNP_USE_MSVCPP
 #endif
