@@ -2,6 +2,7 @@
 #include "deps.h"
 
 #include "cfg.h"
+#include "cfg2.h"
 
 #include <iostream>
 #include <fstream>
@@ -18,7 +19,8 @@ int main(void)
 
     Cfg cfg = {};
 
-    bool b = ReadCfg("cmt1.cfg", cfg);
+    //bool b = ReadCfg("cmt1.cfg", cfg);
+    bool b = Cfg2::ReadCfg("cmt1.cfg");
 
     matroska_init();
 
