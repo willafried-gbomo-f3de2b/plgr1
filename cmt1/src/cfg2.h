@@ -39,6 +39,9 @@ namespace Cfg2::detail
 	template <class T>
 	struct Cfg
 	{
+		typedef std::basic_string<T> str_t;
+		typedef std::basic_string_view<T> sv_t;
+
 		std::basic_istream<T> &m_strm;
 
 		Cfg(std::basic_istream<T> &s) : m_strm(s) {}
@@ -59,7 +62,7 @@ namespace Cfg2::detail
 				// read a line
 				auto len = m_strm.getline(buf.data(), buf.size())
 							   .gcount();
-				std::basic_string_view<T> line(buf.data());
+				sv_t line(buf.data());
 
 				// // remove CR, LF, if any
 				// while (line.size() &&
@@ -77,9 +80,17 @@ namespace Cfg2::detail
 				if (!line.size())
 					continue;
 				cout << "line:" << num_lines << "(" << line.size() << "): " << line << "|" << endl;
+
+				str_t key, val; 
+				ParseLine(line, key, val);
 			}
 
 			return true;
+		}
+
+		void ParseLine(sv_t& line, str_t& out_key, str_t& out_val)
+		{
+
 		}
 	};
 } //namespace Cfg2::detail
