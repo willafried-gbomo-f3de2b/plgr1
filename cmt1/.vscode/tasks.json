@@ -236,7 +236,7 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": [],
+            "problemMatcher": ["$msCompile"],
             "group": "build",
             "presentation": {
                 "focus": true,
