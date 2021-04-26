@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <istream>
 #include <fstream>
 #include <vector>
@@ -12,7 +13,10 @@ namespace Cfg2
 	{
 		template <class>
 		struct Cfg;
-	} //namespace detail
+	} //namespace detai
+	
+	template <class T>
+	bool ReadCfg(std::basic_istream<T> &strm);
 
 	template <class T>
 	bool ReadCfg(const T *path)
