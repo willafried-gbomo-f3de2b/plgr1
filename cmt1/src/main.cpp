@@ -1,6 +1,8 @@
 ﻿
 #include "deps.h"
 
+#include "cfg.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,6 +15,8 @@ int main(void)
 
     const char *locstr = setlocale(LC_ALL, "");
     cout << "locale: " << locstr << endl;
+
+    bool b = ReadCfg("cmt1.cfg");
 
     matroska_init();
 
