@@ -14,7 +14,7 @@ namespace Cfg2
 		template <class>
 		struct Cfg;
 	} //namespace detai
-	
+
 	template <class T>
 	bool ReadCfg(std::basic_istream<T> &strm);
 
@@ -75,19 +75,18 @@ namespace Cfg2::detail
 
 				if (!line.size())
 					continue;
-				cout << "line:" << num_lines << "(" << line.size() << "): " 
-					<< line << "|" << endl;
+				cout << "line:" << num_lines << "(" << line.size() << "): "
+					 << line << "|" << endl;
 
-				str_t key, val; 
+				str_t key, val;
 				ParseLine(line, key, val);
 			}
 
 			return true;
 		}
 
-		void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val)
+		void ParseLine(const sv_t &line, str_t &out_key, str_t &out_val)
 		{
-
 		}
 	};
 } //namespace Cfg2::detail
