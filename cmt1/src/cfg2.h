@@ -60,18 +60,10 @@ namespace Cfg2::detail
 			{
 				num_lines++;
 
-				// skip first spaces
-				//std::ws(m_strm);
-
 				// read a line
 				auto len = m_strm.getline(buf.data(), buf.size())
 							   .gcount();
 				sv_t line(buf.data());
-
-				// // remove CR, LF, if any
-				// while (line.size() &&
-				// 	   (line.back() == '\r' || line.back() == '\n'))
-				// 	line.remove_suffix(1);
 
 				// remove trailing spaces, if any
 				while (line.size() && std::isspace(line.back(), std::locale()))
@@ -83,7 +75,8 @@ namespace Cfg2::detail
 
 				if (!line.size())
 					continue;
-				cout << "line:" << num_lines << "(" << line.size() << "): " << line << "|" << endl;
+				cout << "line:" << num_lines << "(" << line.size() << "): " 
+					<< line << "|" << endl;
 
 				str_t key, val; 
 				ParseLine(line, key, val);
@@ -92,7 +85,7 @@ namespace Cfg2::detail
 			return true;
 		}
 
-		void ParseLine(sv_t& line, str_t& out_key, str_t& out_val)
+		void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val)
 		{
 
 		}
