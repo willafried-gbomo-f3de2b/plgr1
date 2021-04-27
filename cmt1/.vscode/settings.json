@@ -6,5 +6,6 @@
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.vcFormat.indent.namespaceContents": false,
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
+    "C_Cpp.formatting": "vcFormat",
 
 }

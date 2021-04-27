@@ -12,39 +12,39 @@ using std::cout, std::endl;
 
 int main(void)
 {
-    cout << "main()::start..." << endl;
+	cout << "main()::start..." << endl;
 
-    const char *locstr = setlocale(LC_ALL, "");
-    cout << "locale: " << locstr << endl;
+	const char* locstr = setlocale(LC_ALL, "");
+	cout << "locale: " << locstr << endl;
 
-    Cfg cfg = {};
+	Cfg cfg = {};
 
-    //bool b = ReadCfg("cmt1.cfg", cfg);
-    bool b = Cfg2::ReadCfg("cmt1.cfg");
+	//bool b = ReadCfg("cmt1.cfg", cfg);
+	bool b = Cfg2::ReadCfg("cmt1.cfg");
 
-    matroska_init();
+	matroska_init();
 
-    sqlite3_initialize();
+	sqlite3_initialize();
 
-    std::string ifname;
-    int port = 0;
-    std::string logname = "pupnp1.log";
-    
-    ifname = cfg.values.nw_name;
-    port = cfg.values.nw_port;
+	std::string ifname;
+	int port = 0;
+	std::string logname = "pupnp1.log";
 
-    UpnpLog *upnplog = UpnpLog_new();
-    UpnpInitLog(upnplog);
-    UpnpSetLogLevel(upnplog, UPNP_ERROR);
-    UpnpSetLogFileName(upnplog, logname.c_str());
-    UpnpLib *upnplib = nullptr;
-    UpnpInit2(&upnplib,
-              ifname.empty() ? nullptr : ifname.c_str(),
-              port, logname.c_str());
+	ifname = cfg.values.nw_name;
+	port = cfg.values.nw_port;
 
-    auto fsd = FLAC__stream_decoder_new();
+	UpnpLog* upnplog = UpnpLog_new();
+	UpnpInitLog(upnplog);
+	UpnpSetLogLevel(upnplog, UPNP_ERROR);
+	UpnpSetLogFileName(upnplog, logname.c_str());
+	UpnpLib* upnplib = nullptr;
+	UpnpInit2(&upnplib,
+		ifname.empty() ? nullptr : ifname.c_str(),
+		port, logname.c_str());
 
-    UpnpFinish(upnplib);
+	auto fsd = FLAC__stream_decoder_new();
 
-    cout << "main(): end." << endl;
+	UpnpFinish(upnplib);
+
+	cout << "main(): end." << endl;
 }
