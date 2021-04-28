@@ -15,7 +15,11 @@ template <class> struct Cfg;
 
 } // namespace detail
 
-template <class T> bool ReadCfg(std::basic_istream<T>& strm);
+template <class T> bool ReadCfg(std::basic_istream<T>& strm)
+{
+	detail::Cfg<T> cfg(strm);
+	return cfg.Read();
+}
 
 template <class T> bool ReadCfg(const T* path)
 {
@@ -24,12 +28,6 @@ template <class T> bool ReadCfg(const T* path)
 	if (!ifs.is_open())
 		return false;
 	return ReadCfg<T>(ifs);
-}
-
-template <class T> bool ReadCfg(std::basic_istream<T>& strm)
-{
-	detail::Cfg<T> cfg(strm);
-	return cfg.Read();
 }
 
 } // namespace Cfg2
