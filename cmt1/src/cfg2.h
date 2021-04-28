@@ -67,8 +67,8 @@ template <class T> struct Cfg {
 
 			if (!line.size())
 				continue;
-			cout << "line:" << num_lines << "(" << line.size() << "): " << line << "|"
-				<< endl;
+			cout << "line:" << num_lines << "(" << line.size() << "): "
+				<< line << "|" << endl;
 
 			str_t key, val;
 			ParseLine(line, key, val);
@@ -82,13 +82,50 @@ template <class T> struct Cfg {
 	{
 		sv_t::const_iterator first_end, sep, second_start, end_content;
 		first_end = sep = second_start = end_content = line.cend();
-		sv_t::value_type cur_quote = 0;
-		bool escape = false;
+		sv_t::value_type quote = 0;
+		int escape = 0;
 
-		auto iter = line.cbegin();
-		for (auto iter = line.cbegin(); iter != line.cend(); iter++) {
-
+		for (auto iter = line.cbegin(), iter2 = line.cbegin();
+			iter != line.cend() && end_content == line.cend();
+			iter2 = iter++,
+			escape = (escape == 0 || escape == 2) ? 0 : 2)
+		{
+			if (escape == 0) {
+				switch (*iter) {
+				case '"': case '\'':
+					if (quote == 0) {
+						quote = *iter;
+					}
+					else if (quote == *iter) {
+						quote = 0;
+					}
+					break;
+				case '=':
+					if (quote == 0) {
+						sep = iter;
+					}
+					break;
+				case '#':
+					if (quote == 0) {
+						end_content = iter;
+					}
+					break;
+				case '\\':
+					escape = 1;
+					break;
+				}
+			}
 		}
+
+		if (end_content != line.cend()) {
+			cout << "w/ comment: " << sv_t(&*end_content) << endl;
+		}
+		if (sep != line.cend()) {
+			cout << "key=" << sv_t(&*line.cbegin(), sep - line.cbegin()) 
+				<< ", val=" << sv_t(&*sep, end_content - sep) << endl;
+		}
+
+		cout << "e" << endl;
 	}
 
 };
