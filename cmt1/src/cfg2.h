@@ -86,7 +86,7 @@ template <class T> struct Cfg {
 		bool escape = false;
 
 		auto iter = line.cbegin();
-		for (auto iter = line.cbegin(); iter != line.cend(); ) {
+		for (auto iter = line.cbegin(); iter != line.cend(); iter++) {
 
 		}
 	}
