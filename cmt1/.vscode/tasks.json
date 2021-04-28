@@ -41,7 +41,6 @@
             },
             "problemMatcher": []
         },
-        // windows generate
         {
             "label": "task [win]: generate-with-deps",
             "type": "shell",
@@ -51,17 +50,17 @@
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=0",
-                "-DCRT_STATIC=0",
+                "-DCRT_STATIC=0"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/build",
+                "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": [],
             "presentation": {
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            },
+            }
         },
         {
             "label": "task [win]: generate-with-deps-x64",
@@ -94,7 +93,7 @@
                 "..",
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=0",
-                "-DCRT_STATIC=0",
+                "-DCRT_STATIC=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -126,7 +125,7 @@
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            },
+            }
         },
         {
             "label": "task [win]: generate-with-deps-static-crt",
@@ -137,7 +136,7 @@
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=0",
-                "-DCRT_STATIC=1",
+                "-DCRT_STATIC=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -153,7 +152,7 @@
                 "-DBUILD_SHARED_LIBS=0",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
-                "-DCRT_STATIC=0",
+                "-DCRT_STATIC=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -169,14 +168,13 @@
                 "-DBUILD_SHARED_LIBS=0",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=1",
-                "-DCRT_STATIC=1",
+                "-DCRT_STATIC=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
             "problemMatcher": []
         },
-        // windows build
         {
             "label": "task [win]: build-deps-debug",
             "type": "shell",
@@ -198,7 +196,7 @@
                 "focus": true,
                 "panel": "dedicated",
                 "clear": true
-            },
+            }
         },
         {
             "label": "task [win]: build-deps-release",
@@ -236,7 +234,9 @@
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
-            "problemMatcher": ["$msCompile"],
+            "problemMatcher": [
+                "$msCompile"
+            ],
             "group": "build",
             "presentation": {
                 "focus": true,
@@ -265,7 +265,6 @@
                 "clear": true
             }
         },
-        // linux generate
         {
             "label": "task [lnx]: generate-with-deps-debug",
             "type": "shell",
@@ -275,7 +274,7 @@
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=0",
-                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_BUILD_TYPE=Debug"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -296,7 +295,7 @@
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=1",
                 "-DDEPS_STATIC=0",
-                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_BUILD_TYPE=Release"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -317,7 +316,7 @@
                 "-DCMAKE_BUILD_TYPE=Debug",
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=0",
-                "-DDEPS_STATIC=0",
+                "-DDEPS_STATIC=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -338,7 +337,7 @@
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DBUILD_SHARED_LIBS=1",
                 "-DDEPS_BUILD=0",
-                "-DDEPS_STATIC=0",
+                "-DDEPS_STATIC=0"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/build"
@@ -350,7 +349,6 @@
                 "clear": true
             }
         },
-        // linux build
         {
             "label": "task [lnx]: build-deps",
             "type": "shell",
@@ -391,7 +389,6 @@
                 "clear": true
             }
         },
-        // windows compound
         {
             "label": "task [win]: <auto> debug",
             "type": "shell",
@@ -403,7 +400,7 @@
                 "task [win]: build-main-debug"
             ],
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "task [win]: <auto> release",
@@ -416,7 +413,7 @@
                 "task [win]: build-main-release"
             ],
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "task [win]: <auto> debug-x64",
@@ -429,7 +426,7 @@
                 "task [win]: build-main-debug"
             ],
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "task [win]: <auto> release-x64",
@@ -442,9 +439,8 @@
                 "task [win]: build-main-release"
             ],
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
-        //linux compound
         {
             "label": "task [lnx]: <auto> debug",
             "type": "shell",
@@ -453,10 +449,10 @@
                 "task [lnx]: generate-with-deps-debug",
                 "task [lnx]: build-deps",
                 "task [lnx]: generate-wo-deps-debug",
-                "task [lnx]: build-main",
+                "task [lnx]: build-main"
             ],
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "task [lnx]: <auto> release",
@@ -466,12 +462,11 @@
                 "task [lnx]: generate-with-deps-release",
                 "task [lnx]: build-deps",
                 "task [lnx]: generate-wo-deps-release",
-                "task [lnx]: build-main",
+                "task [lnx]: build-main"
             ],
             "problemMatcher": [],
-            "group": "build",
+            "group": "build"
         },
-        // input
         {
             "label": "task [win]: build-deps-select",
             "type": "shell",

@@ -17,7 +17,8 @@ template <class> struct Cfg;
 
 template <class T> bool ReadCfg(std::basic_istream<T>& strm);
 
-template <class T> bool ReadCfg(const T* path) {
+template <class T> bool ReadCfg(const T* path)
+{
 	std::basic_ifstream<T> ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
@@ -25,15 +26,16 @@ template <class T> bool ReadCfg(const T* path) {
 	return ReadCfg<T>(ifs);
 }
 
-template <class T> bool ReadCfg(std::basic_istream<T>& strm) {
+template <class T> bool ReadCfg(std::basic_istream<T>& strm)
+{
 	detail::Cfg<T> cfg(strm);
-
 	return cfg.Read();
 }
 
 } // namespace Cfg2
 
 namespace Cfg2::detail {
+
 template <class T> struct Cfg {
 	typedef std::basic_string<T> str_t;
 	typedef std::basic_string_view<T> sv_t;
@@ -42,7 +44,8 @@ template <class T> struct Cfg {
 
 	Cfg(std::basic_istream<T>& s) : m_strm(s) {}
 
-	bool Read(void) {
+	bool Read(void)
+	{
 		using std::cout, std::endl;
 
 		std::vector<T> buf(10 * 1024);
@@ -74,6 +77,20 @@ template <class T> struct Cfg {
 		return true;
 	}
 
-	void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val) {}
+
+	void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val)
+	{
+		sv_t::const_iterator first_end, sep, second_start, end_words;
+		first_end = sep = second_start = end_words = line.cend();
+		sv_t::value_type cur_quote = 0;
+		bool escape = false;
+
+		for (auto iter = line.cbegin(); iter != line.cend(); ) {
+
+		}
+	}
+
 };
-} // namespace Cfg2::detail
+
+
+} //namespace Cfg2::detail
