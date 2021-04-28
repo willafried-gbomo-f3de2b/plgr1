@@ -80,11 +80,12 @@ template <class T> struct Cfg {
 
 	void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val)
 	{
-		sv_t::const_iterator first_end, sep, second_start, end_words;
-		first_end = sep = second_start = end_words = line.cend();
+		sv_t::const_iterator first_end, sep, second_start, end_content;
+		first_end = sep = second_start = end_content = line.cend();
 		sv_t::value_type cur_quote = 0;
 		bool escape = false;
 
+		auto iter = line.cbegin()
 		for (auto iter = line.cbegin(); iter != line.cend(); ) {
 
 		}
