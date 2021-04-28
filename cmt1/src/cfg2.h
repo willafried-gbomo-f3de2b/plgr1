@@ -80,7 +80,7 @@ template <class T> struct Cfg {
 
 	void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val)
 	{
-		using std::cout , std::endl;
+		using std::cout, std::endl;
 		typename sv_t::const_iterator first_end, sep, second_start, end_content;
 		first_end = sep = second_start = end_content = line.cend();
 		typename sv_t::value_type quote = 0;
@@ -122,7 +122,7 @@ template <class T> struct Cfg {
 			cout << "w/ comment: " << sv_t(&*end_content) << endl;
 		}
 		if (sep != line.cend()) {
-			cout << "key=" << sv_t(&*line.cbegin(), sep - line.cbegin()) 
+			cout << "key=" << sv_t(&*line.cbegin(), sep - line.cbegin())
 				<< ", val=" << sv_t(&*sep, end_content - sep) << endl;
 		}
 
