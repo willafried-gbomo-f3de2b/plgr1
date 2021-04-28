@@ -85,7 +85,7 @@ template <class T> struct Cfg {
 		sv_t::value_type cur_quote = 0;
 		bool escape = false;
 
-		auto iter = line.cbegin()
+		auto iter = line.cbegin();
 		for (auto iter = line.cbegin(); iter != line.cend(); ) {
 
 		}
