@@ -19,13 +19,13 @@ template <class T> bool ReadCfg(std::basic_istream<T>& strm)
 	return cfg.Read();
 }
 
-template <class T> bool ReadCfg(const T* path)
+template <class T = char> bool ReadCfg(const char* path)
 {
 	std::basic_ifstream<T> ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
 		return false;
-	return ReadCfg<T>(ifs);
+	return ReadCfg(ifs);
 }
 
 } // namespace Cfg
@@ -152,4 +152,4 @@ template <class T> struct CfgReader
 };
 
 
-} //namespace Cfg2::detail
+} //namespace Cfg::detail
