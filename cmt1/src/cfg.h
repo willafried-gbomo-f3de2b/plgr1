@@ -13,39 +13,49 @@ namespace detail {
 template <class> struct CfgReader;
 } // namespace detail
 
-template <class T> bool ReadCfg(std::basic_istream<T>& strm)
+
+
+template <class Ch, class CB>
+bool ReadCfg(std::basic_istream<Ch>& strm, CB callback)
 {
-	detail::CfgReader<T> cfg(strm);
-	return cfg.Read();
+	detail::CfgReader<Ch> cfg(strm);
+	return cfg.Read(callback);
 }
 
-template <class T = char> bool ReadCfg(const char* path)
+// template <class Ch> bool ReadCfg(std::basic_istream<Ch>& strm)
+// {
+// 	detail::CfgReader<Ch> cfg(strm);
+// 	return cfg.Read([](const char*, const char*) { return true; });
+// }
+
+template <class Ch = char, class CB> bool ReadCfg(const char* path, CB callback)
 {
-	std::basic_ifstream<T> ifs;
+	std::basic_ifstream<Ch> ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
 		return false;
-	return ReadCfg(ifs);
+	return ReadCfg(ifs, callback);
 }
 
 } // namespace Cfg
 
 namespace Cfg::detail {
 
-template <class T> struct CfgReader 
+template <class Ch> struct CfgReader
 {
-	typedef std::basic_string<T> str_t;
-	typedef std::basic_string_view<T> sv_t;
+	typedef std::basic_string<Ch> str_t;
+	typedef std::basic_string_view<Ch> sv_t;
 
-	std::basic_istream<T>& m_strm;
+	std::basic_istream<Ch>& m_strm;
 
-	CfgReader(std::basic_istream<T>& s) : m_strm(s) {}
+	CfgReader(std::basic_istream<Ch>& s) : m_strm(s) {}
 
-	bool Read(void)
+	template <class CB>
+	bool Read(CB callback)
 	{
 		using std::cout, std::endl;
 
-		std::vector<T> buf(10 * 1024);
+		std::vector<Ch> buf(10 * 1024);
 		int num_lines = 0;
 		while (!m_strm.eof()) {
 			num_lines++;
@@ -54,26 +64,24 @@ template <class T> struct CfgReader
 			auto len = m_strm.getline(buf.data(), buf.size()).gcount();
 			sv_t line(buf.data());
 
-			// remove trailing spaces, if any
-			while (line.size() && std::isspace(line.back(), std::locale()))
-				line.remove_suffix(1);
+			// remove preceding/trailing spaces, if any
+			SvTrimSpaces(line);
 
-			// remove preceding spaces, if any
-			while (line.size() && std::isspace(line.front(), std::locale()))
-				line.remove_prefix(1);
-
+			// skip if line is empty
 			if (!line.size())
 				continue;
-			cout << "line:" << num_lines << "(" << line.size() << "): "
-				<< line << "|" << endl;
 
+			// get key-value pair from line
 			str_t key, val;
 			ParseLine(line, key, val);
 
-			if (key.size()) {
-				cout << "  key:" << key << "|";
-			}
-			cout << "  val:" << val << "|" << endl;
+			// skip if both key & value are empty 
+			if (key.empty() && val.empty())
+				continue;
+
+			// return if callback returns false
+			if (!callback(key.empty() ? nullptr : key.c_str(), val.c_str()))
+				return false;
 		}
 
 		return true;
@@ -83,10 +91,10 @@ template <class T> struct CfgReader
 	{
 		typename sv_t::const_iterator sep, end_pos;
 		sep = end_pos = line.cend();
-		T quote = 0;
+		Ch quote = 0;
 		unsigned int escape = 0;
 
-		for (auto iter = line.cbegin(); 
+		for (auto iter = line.cbegin();
 			iter != line.cend() && end_pos == line.cend();
 			iter++, escape >>= 1)
 		{
