@@ -14,23 +14,18 @@ template <class> struct CfgReader;
 } // namespace detail
 
 
-
-template <class Ch, class CB>
-bool ReadCfg(std::basic_istream<Ch>& strm, CB callback)
+template <class CharT, class CB>
+bool ReadCfg(std::basic_istream<CharT>& strm, CB callback)
 {
-	detail::CfgReader<Ch> cfg(strm);
+	detail::CfgReader<CharT> cfg(strm);
 	return cfg.Read(callback);
 }
 
-// template <class Ch> bool ReadCfg(std::basic_istream<Ch>& strm)
-// {
-// 	detail::CfgReader<Ch> cfg(strm);
-// 	return cfg.Read([](const char*, const char*) { return true; });
-// }
 
-template <class Ch = char, class CB> bool ReadCfg(const char* path, CB callback)
+template <class CharT = char, class CB> 
+bool ReadCfg(const char* path, CB callback)
 {
-	std::basic_ifstream<Ch> ifs;
+	std::basic_ifstream<CharT> ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
 		return false;
@@ -39,24 +34,23 @@ template <class Ch = char, class CB> bool ReadCfg(const char* path, CB callback)
 
 } // namespace Cfg
 
+
 namespace Cfg::detail {
 
-template <class Ch> struct CfgReader
+template <class CharT> struct CfgReader
 {
-	typedef std::basic_string<Ch> str_t;
-	typedef std::basic_string_view<Ch> sv_t;
+	typedef std::basic_string<CharT> str_t;
+	typedef std::basic_string_view<CharT> sv_t;
 
-	std::basic_istream<Ch>& m_strm;
+	std::basic_istream<CharT>& m_strm;
 
-	CfgReader(std::basic_istream<Ch>& s) : m_strm(s) {}
+	CfgReader(std::basic_istream<CharT>& s) : m_strm(s) {}
 
-	template <class CB>
-	bool Read(CB callback)
+	template <class CB> bool Read(CB callback)
 	{
-		using std::cout, std::endl;
-
-		std::vector<Ch> buf(10 * 1024);
+		std::vector<CharT> buf(10 * 1024);
 		int num_lines = 0;
+
 		while (!m_strm.eof()) {
 			num_lines++;
 
@@ -91,7 +85,7 @@ template <class Ch> struct CfgReader
 	{
 		typename sv_t::const_iterator sep, end_pos;
 		sep = end_pos = line.cend();
-		Ch quote = 0;
+		CharT quote = 0;
 		unsigned int escape = 0;
 
 		for (auto iter = line.cbegin();
