@@ -14,6 +14,13 @@ template <class> struct CfgReader;
 } // namespace detail
 
 
+template <class CharT> struct READCFG_CALLBACK_PARAMS
+{
+	const CharT *key, *val;
+	int line_number;
+};
+
+
 template <class CharT, class CB>
 bool ReadCfg(std::basic_istream<CharT>& strm, CB callback)
 {
@@ -22,7 +29,7 @@ bool ReadCfg(std::basic_istream<CharT>& strm, CB callback)
 }
 
 
-template <class CharT = char, class CB> 
+template <class CharT = char, class CB>
 bool ReadCfg(const char* path, CB callback)
 {
 	std::basic_ifstream<CharT> ifs;
@@ -32,15 +39,13 @@ bool ReadCfg(const char* path, CB callback)
 	return ReadCfg(ifs, callback);
 }
 
-} // namespace Cfg
 
-
-namespace Cfg::detail {
+namespace detail {
 
 template <class CharT> struct CfgReader
 {
-	typedef std::basic_string<CharT> str_t;
-	typedef std::basic_string_view<CharT> sv_t;
+	typedef std::basic_string<CharT> STR_T;
+	typedef std::basic_string_view<CharT> SV_T;
 
 	std::basic_istream<CharT>& m_strm;
 
@@ -49,14 +54,14 @@ template <class CharT> struct CfgReader
 	template <class CB> bool Read(CB callback)
 	{
 		std::vector<CharT> buf(10 * 1024);
-		int num_lines = 0;
+		int line_number = 0;
 
 		while (!m_strm.eof()) {
-			num_lines++;
+			line_number++;
 
 			// read a line
 			auto len = m_strm.getline(buf.data(), buf.size()).gcount();
-			sv_t line(buf.data());
+			SV_T line(buf.data());
 
 			// remove preceding/trailing spaces, if any
 			SvTrimSpaces(line);
@@ -66,7 +71,7 @@ template <class CharT> struct CfgReader
 				continue;
 
 			// get key-value pair from line
-			str_t key, val;
+			STR_T key, val;
 			ParseLine(line, key, val);
 
 			// skip if both key & value are empty 
@@ -74,16 +79,20 @@ template <class CharT> struct CfgReader
 				continue;
 
 			// return if callback returns false
-			if (!callback(key.empty() ? nullptr : key.c_str(), val.c_str()))
+			READCFG_CALLBACK_PARAMS<CharT> params;
+			params.key = key.empty() ? nullptr : key.c_str();
+			params.val =  val.c_str();
+			params.line_number = line_number;
+			if (!callback(&params)) 
 				return false;
 		}
 
 		return true;
 	}
 
-	void ParseLine(const sv_t& line, str_t& out_key, str_t& out_val)
+	void ParseLine(const SV_T& line, STR_T& out_key, STR_T& out_val)
 	{
-		typename sv_t::const_iterator sep, end_pos;
+		typename SV_T::const_iterator sep, end_pos;
 		sep = end_pos = line.cend();
 		CharT quote = 0;
 		unsigned int escape = 0;
@@ -123,13 +132,13 @@ template <class CharT> struct CfgReader
 			}
 		}
 
-		sv_t val;
+		SV_T val;
 		if (sep != line.cend()) {
-			sv_t key(&line.front(), sep - line.cbegin());
+			SV_T key(&line.front(), sep - line.cbegin());
 			out_key = SvTrimSpaces(key);
 
 			if (++sep != line.cend()) {
-				sv_t val(&*sep, end_pos - sep);
+				SV_T val(&*sep, end_pos - sep);
 				val = out_val = SvTrimSpaces(val);
 			}
 		}
@@ -137,13 +146,13 @@ template <class CharT> struct CfgReader
 			out_key.clear();
 
 			if (line.size()) {
-				sv_t val(&line.front(), end_pos - line.cbegin());
+				SV_T val(&line.front(), end_pos - line.cbegin());
 				out_val = SvTrimSpaces(val);
 			}
 		}
 	}
 
-	sv_t& SvTrimSpaces(sv_t& sv)
+	SV_T& SvTrimSpaces(SV_T& sv)
 	{
 		while (sv.size() && isspace(sv.front()))
 			sv.remove_prefix(1);
@@ -153,5 +162,5 @@ template <class CharT> struct CfgReader
 	}
 };
 
-
-} //namespace Cfg::detail
+} // namespace detail
+} // namespace Cfg

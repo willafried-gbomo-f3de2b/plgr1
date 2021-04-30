@@ -19,12 +19,14 @@ int main(void)
 	//Cfg cfg = {};
 
 	//bool b = ReadCfg("cmt1.cfg", cfg);
-	bool b = Cfg::ReadCfg("cmt1.cfg", [](const char* key, const char* val) {
-		cout << "  |";
-		if (key)
-			cout << key << "|";
-		cout << val << "|" << endl;
-		return true;
+	bool b = Cfg::ReadCfg("cmt1.cfg",
+		[](const Cfg::READCFG_CALLBACK_PARAMS<char>* params)
+		{
+			cout << "  |";
+			if (params->key)
+				cout << params->key << "|";
+			cout << params->val << "|" << endl;
+			return true;
 		});
 
 	matroska_init();
