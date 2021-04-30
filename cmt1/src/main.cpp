@@ -22,10 +22,10 @@ int main(void)
 	bool b = Cfg::ReadCfg("cmt1.cfg",
 		[](const Cfg::READCFG_CALLBACK_PARAMS<char>* params)
 		{
-			cout << "  |";
+			cout << "  [" << params->line_number << "] |";
 			if (params->key)
 				cout << params->key << "|";
-			cout << params->val << "|" << endl;
+			cout << Cfg::Unquote(params->val) << "|" << endl;
 			return true;
 		});
 

@@ -16,7 +16,7 @@ template <class> struct CfgReader;
 
 template <class CharT> struct READCFG_CALLBACK_PARAMS
 {
-	const CharT *key, *val;
+	const CharT* key, * val;
 	int line_number;
 };
 
@@ -37,6 +37,20 @@ bool ReadCfg(const char* path, CB callback)
 	if (!ifs.is_open())
 		return false;
 	return ReadCfg(ifs, callback);
+}
+
+
+template <class CharT>
+std::basic_string<std::remove_const_t<CharT>> Unquote(CharT* str)
+{
+	std::basic_string_view<CharT> sv(str);
+	if (sv.size() >= 2 && sv.front() == sv.back()) {
+		if (sv.front() == '\'' || sv.front() == '"') {
+			sv.remove_prefix(1); sv.remove_suffix(1);
+		}
+	}
+	return std::basic_string<std::remove_const_t<CharT>>(&sv.front(),
+		sv.size());
 }
 
 
@@ -81,9 +95,9 @@ template <class CharT> struct CfgReader
 			// return if callback returns false
 			READCFG_CALLBACK_PARAMS<CharT> params;
 			params.key = key.empty() ? nullptr : key.c_str();
-			params.val =  val.c_str();
+			params.val = val.c_str();
 			params.line_number = line_number;
-			if (!callback(&params)) 
+			if (!callback(&params))
 				return false;
 		}
 
