@@ -11,34 +11,39 @@ using std::cout, std::endl;
 
 int main(void)
 {
+	cout << endl;
 	cout << "main()::start..." << endl;
 
 	const char* locstr = setlocale(LC_ALL, "");
 	cout << "locale: " << locstr << endl;
 
-	//Cfg cfg = {};
+	std::string ifname;
+	int port = 0;
+	std::string logname = "pupnp1.log";
 
-	//bool b = ReadCfg("cmt1.cfg", cfg);
 	bool b = Cfg::ReadCfg("cmt1.cfg",
-		[](const Cfg::READCFG_CALLBACK_PARAMS<char>* params)
+		[&](const Cfg::READCFG_CALLBACK_PARAMS<char>* params)
 		{
 			cout << "  [" << params->line_number << "] |";
 			if (params->key)
 				cout << params->key << "|";
 			cout << Cfg::Unquote(params->val) << "|" << endl;
+
+			if (params->key) {
+				std::string key_str(params->key);
+				std::string val_str(Cfg::Unquote(params->val));
+				if (key_str == "nw_name") {
+					ifname = val_str;
+				} else if(key_str == "nw_port") {
+					port = strtol(val_str.c_str(), nullptr, 10);
+				}
+			}
 			return true;
 		});
 
 	matroska_init();
 
 	sqlite3_initialize();
-
-	std::string ifname;
-	int port = 0;
-	std::string logname = "pupnp1.log";
-
-	// ifname = cfg.values.nw_name;
-	// port = cfg.values.nw_port;
 
 	UpnpLog* upnplog = UpnpLog_new();
 	UpnpInitLog(upnplog);
