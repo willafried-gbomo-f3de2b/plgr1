@@ -64,7 +64,7 @@ template <class CharT> struct CfgReader
 	std::basic_istream<CharT>& m_strm;
 
 	CfgReader(std::basic_istream<CharT>& s) : m_strm(s) {}
-
+	
 	template <class CB> bool Read(CB callback)
 	{
 		std::vector<CharT> buf(10 * 1024);
