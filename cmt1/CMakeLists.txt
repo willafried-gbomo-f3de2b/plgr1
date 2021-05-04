@@ -144,6 +144,7 @@ if(NOT DEPS_STATIC)
 			FLAC 
 			sqlite3 
 			upnp
+			pthread
 		)
 	endif()
 else()

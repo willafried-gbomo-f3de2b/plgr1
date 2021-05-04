@@ -103,7 +103,7 @@ int main(void)
 		x->join();
 
 	auto r = Log::D::n;
-	cout << r << ", " << &r << ", " << &Log::D::n << endl;
+	cout << r << ", " << &r << ", " /* << &Log::D::n */ << endl;
 	cout << Log::D::m << ", " << &Log::D::m << endl;
 	cout << Log::D::s << ", " << &Log::D::s << endl;
 

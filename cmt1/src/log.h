@@ -79,7 +79,8 @@ struct Log : Log2<CharT, Crgs...>
 	typedef Log<CharT, Crgs...> LOG_T;
 
 	template <class ...Vs>
-	Log(std::ostream& strm, Vs&& ...vs) : Log2(std::forward<Vs>(vs)...),
+	Log(std::ostream& strm, Vs&& ...vs)
+		: base(std::forward<Vs>(vs)...),
 		m_strm(strm)
 	{
 		cout << "template <" << typeid(CharT).name() << ", class ...Crgs("
@@ -93,7 +94,7 @@ struct Log : Log2<CharT, Crgs...>
 
 	template <class T, class ...Vs> LOG_T& o(T&& t, Vs&& ...vs)
 	{
-		std::lock_guard lg(m_mtx);
+		std::lock_guard lg(base::m_mtx);
 
 		m_strm << "LOG: ";
 		base::o(m_strm, std::forward<Vs>(vs)...);
@@ -120,7 +121,7 @@ template <class T, class Base> struct A : Base
 	~A() { cout << "A::~A()" << endl; }
 	A& operator=(const A&) { cout << "A::op=(const A&)" << endl; }
 	A& operator=(A&&) { cout << "A::op=(A&&)" << endl; }
-	template <class T> A(T&& t) {
+	template <class V> A(V&& t) {
 		cout << "temp<T> A::A(T&&)" << endl;
 	}
 
