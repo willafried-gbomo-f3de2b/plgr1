@@ -10,6 +10,26 @@
 
 using std::cout, std::endl;
 
+
+template <class CharT>
+std::basic_ostream<CharT>& operator<<(std::basic_ostream<CharT>& os,
+	const LOGLEVEL& level)
+{
+	switch (level) {
+	case Error:
+		os << "Error";
+		break;
+		case LOGLEVEL::Info:
+		os << "Info";
+		break;
+	default:
+		os << (int)level;
+	}
+	return os;
+}
+
+
+
 int main(void)
 {
 	cout << endl;
@@ -61,8 +81,10 @@ int main(void)
 	UpnpFinish(upnplib);
 
 	double d = 2.2;
-	Log::Log<char, int, double> log(std::cout, 1, d);
-	log.o(d, 5, 1.111);
+	Log::Log<char, LOGLEVEL, double> log(std::cout, LOGLEVEL::Error, d);
+	log.o(d, LOGLEVEL::Debug, 1.111);
+	log.o(d + 0.7, LOGLEVEL::Info);
+	log.o(d);
 
 
 	cout << "main(): end." << endl;

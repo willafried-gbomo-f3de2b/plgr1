@@ -5,6 +5,12 @@
 #include <iostream>
 
 
+enum LOGLEVEL {
+	Fatal, Error, Warn, Info, Debug
+};
+
+
+
 namespace Log {
 
 using std::cout, std::endl;
@@ -70,6 +76,7 @@ template <class CharT, class ...Args>
 struct Log : Log2<CharT, Args...>
 {
 	typedef Log2<CharT, Args...> base;
+	typedef Log<CharT, Args...> LOG_T;
 
 	template <class ...Vs>
 	Log(std::ostream& strm, Vs&& ...vs) : Log2(std::forward<Vs>(vs)...),
@@ -84,13 +91,14 @@ struct Log : Log2<CharT, Args...>
 
 	std::ostream& m_strm;
 
-	template <class T, class ...Vs> void o(T&& t, Vs&& ...vs)
+	template <class T, class ...Vs> LOG_T& o(T&& t, Vs&& ...vs)
 	{
 		std::lock_guard lg(m_mtx);
 
 		m_strm << "LOG: ";
 		base::o(m_strm, std::forward<Vs>(vs)...);
 		m_strm << " " << t << endl;
+		return *this;
 	}
 };
 
