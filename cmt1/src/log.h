@@ -112,7 +112,10 @@ template <class T> struct A
 		cout << "A::A()" << endl;
 	}
 	A(const A&) { cout << "A::A(const A&)" << endl; }
-	A(A&&) { cout << "A::A(A&&)" << endl; }
+	A(A&& r) {
+		m.swap(r.m);
+		cout << "A::A(A&&)" << endl;
+	}
 	~A() { cout << "A::~A()" << endl; }
 	A& operator=(const A&) { cout << "A::op=(const A&)" << endl; }
 	A& operator=(A&&) { cout << "A::op=(A&&)" << endl; }
