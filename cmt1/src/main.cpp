@@ -2,6 +2,7 @@
 #include "deps.h"
 
 #include "cfg.h"
+#include "log.h"
 
 #include <iostream>
 #include <fstream>
