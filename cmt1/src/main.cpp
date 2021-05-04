@@ -35,7 +35,8 @@ int main(void)
 				std::string val_str(Cfg::Unquote(params->val));
 				if (key_str == "nw_name") {
 					ifname = val_str;
-				} else if(key_str == "nw_port") {
+				}
+				else if (key_str == "nw_port") {
 					port = strtol(val_str.c_str(), nullptr, 10);
 				}
 			}
@@ -59,8 +60,9 @@ int main(void)
 
 	UpnpFinish(upnplib);
 
-	Log::Log("abc");
-	void f();
-	f();
+	double d = 2.2;
+	Log::Log<char, int, double> log(1, d);
+
+
 	cout << "main(): end." << endl;
 }

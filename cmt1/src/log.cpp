@@ -11,4 +11,4 @@ namespace detail {
 
 } //namespace Log
 
-void f() { Log::Log("abc"); }
+
