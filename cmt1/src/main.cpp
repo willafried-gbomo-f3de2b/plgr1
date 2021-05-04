@@ -61,7 +61,8 @@ int main(void)
 	UpnpFinish(upnplib);
 
 	double d = 2.2;
-	Log::Log<char, int, double> log(1, d);
+	Log::Log<char, int, double> log(std::cout, 1, d);
+	log.o(d, 5, 1.111);
 
 
 	cout << "main(): end." << endl;
