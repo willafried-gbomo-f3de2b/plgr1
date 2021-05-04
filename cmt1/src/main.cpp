@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <thread>
 
 using std::cout, std::endl;
 
@@ -19,7 +20,7 @@ std::basic_ostream<CharT>& operator<<(std::basic_ostream<CharT>& os,
 	case Error:
 		os << "Error";
 		break;
-		case LOGLEVEL::Info:
+	case LOGLEVEL::Info:
 		os << "Info";
 		break;
 	default:
@@ -85,12 +86,18 @@ int main(void)
 	log.o(d, LOGLEVEL::Debug, 1.111);
 	log.o(d + 0.7, LOGLEVEL::Info);
 	log.o(d);
-	
+
 	Log::B<int> b1;
-	b1
-	.f("abc")
-	.f("123")
-	.f("x");
+	std::thread t1([&]() {
+		b1.f("abc").f("123").f("x");
+		b1.f("xyz").f("321").f("y");
+		});
+	std::thread t2([&]() {
+		b1.f("ABC").f("456").f("X");
+		b1.f("XYZ").f("654").f("Y");
+		});
+	t1.join();
+	t2.join();
 
 	cout << "main(): end." << endl;
 }

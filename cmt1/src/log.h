@@ -105,11 +105,12 @@ struct Log : Log2<CharT, Crgs...>
 
 template <class T> struct C;
 
-template <class T> struct A
+template <class T, class Base> struct A : Base
 {
 	A(std::unique_ptr<C<int>> ul, const char* p) {
 		m.swap(ul);
 		cout << "A::A()" << endl;
+		f(p);
 	}
 	A(const A&) { cout << "A::A(const A&)" << endl; }
 	A(A&& r) {
@@ -124,7 +125,7 @@ template <class T> struct A
 	}
 
 	A& f(const char* p) {
-		cout << "A::f()" << endl;
+		cout << "A::f(), " << p << endl;
 		return *this;
 	}
 
@@ -143,10 +144,11 @@ template <class T> struct C
 
 template <class T> struct B
 {
-	A<T> f(const char* p) {
+	A<T, B> f(const char* p) {
 		std::unique_ptr<C<int>> ul(new C<int>);
-		A<int> a(std::move(ul), p);
-		return std::move(a);
+		// A<int, B> a(std::move(ul), p);
+		// return std::move(a);
+		return A<int, B>(std::move(ul), p);
 	}
 };
 
