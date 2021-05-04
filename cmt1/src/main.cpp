@@ -102,5 +102,10 @@ int main(void)
 	for (auto x : v1)
 		x->join();
 
+	auto r = Log::D::n;
+	cout << r << ", " << &r << ", " << &Log::D::n << endl;
+	cout << Log::D::m << ", " << &Log::D::m << endl;
+	cout << Log::D::s << ", " << &Log::D::s << endl;
+
 	cout << "main(): end." << endl;
 }

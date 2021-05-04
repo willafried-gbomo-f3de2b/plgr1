@@ -146,13 +146,17 @@ template <class T> struct B
 {
 	A<T, B> f(const char* p) {
 		std::unique_lock<std::mutex> ul(m_mtx);
-		// A<int, B> a(std::move(ul), p);
-		// return std::move(a);
 		return A<int, B>(std::move(ul), p);
 	}
 	std::mutex m_mtx;
 };
 
+
+struct D {
+	static const int n = 123;
+	inline static int m = 456;
+	inline static std::string s = std::string("abc");
+};
 
 } //namespace Log
 
