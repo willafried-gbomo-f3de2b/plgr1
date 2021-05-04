@@ -59,5 +59,6 @@ int main(void)
 
 	UpnpFinish(upnplib);
 
+	Log::Log("abc");
 	cout << "main(): end." << endl;
 }

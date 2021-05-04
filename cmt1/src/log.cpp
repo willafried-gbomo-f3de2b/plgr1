@@ -3,7 +3,12 @@
 
 namespace Log {
 
-std::mutex g_LogMtx;
+namespace detail {
+
+std::mutex LogMtx;
+
+} //namespace detail
 
 } //namespace Log
+
 
