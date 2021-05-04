@@ -16,12 +16,12 @@ namespace Log {
 using std::cout, std::endl;
 
 
-template <class CharT, class ...Args> struct Log2
+template <class CharT, class ...Crgs> struct Log2
 {
 	Log2()
 	{
-		cout << "template <" << typeid(CharT).name() << ", class ...Args("
-			<< sizeof...(Args) << ")> struct Log2" << endl;
+		cout << "template <" << typeid(CharT).name() << ", class ...Crgs("
+			<< sizeof...(Crgs) << ")> struct Log2" << endl;
 		cout << "  - Log2::ctor()" << endl;
 	}
 	inline static std::mutex m_mtx;
@@ -33,20 +33,20 @@ template <class CharT, class ...Args> struct Log2
 };
 
 
-template <class CharT, class T, class ...Args>
-struct Log2<CharT, T, Args...> : Log2<CharT, Args...>
+template <class CharT, class T, class ...Crgs>
+struct Log2<CharT, T, Crgs...> : Log2<CharT, Crgs...>
 {
-	typedef Log2<CharT, Args...> base;
+	typedef Log2<CharT, Crgs...> base;
 
 	template <class V0, class ...Vs>
 	Log2(V0&& v0, Vs&& ...vs) : base(std::forward<Vs>(vs)...), m_def(v0)
 	{
 		cout << "template <" << typeid(CharT).name() << ", "
-			<< typeid(T).name() << ", class ...Args(" << sizeof...(Args)
+			<< typeid(T).name() << ", class ...Crgs(" << sizeof...(Crgs)
 			<< ")> struct Log2<" << typeid(CharT).name() << ", "
-			<< typeid(T).name() << ", Args...(" << sizeof...(Args)
-			<< ")> : Log2<" << typeid(CharT).name() << ", Args...("
-			<< sizeof...(Args) << ")>" << endl;
+			<< typeid(T).name() << ", Crgs...(" << sizeof...(Crgs)
+			<< ")> : Log2<" << typeid(CharT).name() << ", Crgs...("
+			<< sizeof...(Crgs) << ")>" << endl;
 		cout << "  - Log2::ctor(" << v0 << ", Vs...(" << sizeof...(Vs) << "))"
 			<< endl;
 	}
@@ -72,19 +72,19 @@ struct Log2<CharT, T, Args...> : Log2<CharT, Args...>
 
 
 
-template <class CharT, class ...Args>
-struct Log : Log2<CharT, Args...>
+template <class CharT, class ...Crgs>
+struct Log : Log2<CharT, Crgs...>
 {
-	typedef Log2<CharT, Args...> base;
-	typedef Log<CharT, Args...> LOG_T;
+	typedef Log2<CharT, Crgs...> base;
+	typedef Log<CharT, Crgs...> LOG_T;
 
 	template <class ...Vs>
 	Log(std::ostream& strm, Vs&& ...vs) : Log2(std::forward<Vs>(vs)...),
 		m_strm(strm)
 	{
-		cout << "template <" << typeid(CharT).name() << ", class ...Args("
-			<< sizeof...(Args) << ")> struct Log : Log2<"
-			<< typeid(CharT).name() << ", Args...(" << sizeof...(Args)
+		cout << "template <" << typeid(CharT).name() << ", class ...Crgs("
+			<< sizeof...(Crgs) << ")> struct Log : Log2<"
+			<< typeid(CharT).name() << ", Crgs...(" << sizeof...(Crgs)
 			<< ")>" << endl;
 		cout << "  - Log::ctor(Vs...(" << sizeof...(Vs) << "))" << endl;
 	}
@@ -103,44 +103,47 @@ struct Log : Log2<CharT, Args...>
 };
 
 
-template <class T> struct LogTmp;
+template <class T> struct C;
 
-template <class Strm>
-struct LogBase
+template <class T> struct A
 {
-	LogBase(Strm& strm) : m_strm(strm)
-	{
-		
+	A(std::unique_ptr<C<int>> ul, const char* p) {
+		m.swap(ul);
+		cout << "A::A()" << endl;
 	}
-	
-
-	template <class V>
-	LogTmp<Strm>& Write(V&& v)
-	{
-		m_strm << v;
-		return LogTmp<Strm>(std::move(m_lock));
+	A(const A&) { cout << "A::A(const A&)" << endl; }
+	A(A&&) { cout << "A::A(A&&)" << endl; }
+	~A() { cout << "A::~A()" << endl; }
+	A& operator=(const A&) { cout << "A::op=(const A&)" << endl; }
+	A& operator=(A&&) { cout << "A::op=(A&&)" << endl; }
+	template <class T> A(T&& t) {
+		cout << "temp<T> A::A(T&&)" << endl;
 	}
 
+	A& f(const char* p) {
+		cout << "A::f()" << endl;
+		return *this;
+	}
 
-	inline static std::mutex m_mtx;
-	std::unique_lock<std::mutex> m_lock;
-	Strm& m_strm;
+	std::unique_ptr<C<int>> m;
 };
 
-
-template <class T>
-struct LogTmp
+template <class T> struct C
 {
-	LogTmp(std::unique_lock<std::mutex>&& lock)
-	{
-		m_lock.swap(lock);
-	}
-	std::unique_lock<std::mutex> m_lock;
+	C() { cout << "C::C()" << endl; }
+	C(const C&) { cout << "C::C(const C&)" << endl; }
+	C(C&&) { cout << "C::C(C&&)" << endl; }
+	~C() { cout << "C::~C()" << endl; }
+	C& operator=(const C&) { cout << "C::op=(const C&)" << endl; }
+	C& operator=(C&&) { cout << "C::op=(C&&)" << endl; }
+};
 
-	template <class V>
-	LogTmp Write(V&& v)
-	{
-
+template <class T> struct B
+{
+	A<T> f(const char* p) {
+		std::unique_ptr<C<int>> ul(new C<int>);
+		A<int> a(std::move(ul), p);
+		return std::move(a);
 	}
 };
 

@@ -86,8 +86,11 @@ int main(void)
 	log.o(d + 0.7, LOGLEVEL::Info);
 	log.o(d);
 	
-	Log::LogBase<std::ostream> lb1(std::cout);
-	lb1.Write("abc").Write(123);
+	Log::B<int> b1;
+	b1
+	.f("abc")
+	.f("123")
+	.f("x");
 
 	cout << "main(): end." << endl;
 }
