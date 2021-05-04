@@ -107,5 +107,7 @@ int main(void)
 	cout << Log::D::m << ", " << &Log::D::m << endl;
 	cout << Log::D::s << ", " << &Log::D::s << endl;
 
+	b1.f(123);
+
 	cout << "main(): end." << endl;
 }

@@ -16,12 +16,12 @@ namespace Log {
 using std::cout, std::endl;
 
 
-template <class CharT, class ...Crgs> struct Log2
+template <class CharT, class ...Args> struct Log2
 {
 	Log2()
 	{
-		cout << "template <" << typeid(CharT).name() << ", class ...Crgs("
-			<< sizeof...(Crgs) << ")> struct Log2" << endl;
+		cout << "template <" << typeid(CharT).name() << ", class ...Args("
+			<< sizeof...(Args) << ")> struct Log2" << endl;
 		cout << "  - Log2::ctor()" << endl;
 	}
 	inline static std::mutex m_mtx;
@@ -33,20 +33,20 @@ template <class CharT, class ...Crgs> struct Log2
 };
 
 
-template <class CharT, class T, class ...Crgs>
-struct Log2<CharT, T, Crgs...> : Log2<CharT, Crgs...>
+template <class CharT, class T, class ...Args>
+struct Log2<CharT, T, Args...> : Log2<CharT, Args...>
 {
-	typedef Log2<CharT, Crgs...> base;
+	typedef Log2<CharT, Args...> base;
 
 	template <class V0, class ...Vs>
 	Log2(V0&& v0, Vs&& ...vs) : base(std::forward<Vs>(vs)...), m_def(v0)
 	{
 		cout << "template <" << typeid(CharT).name() << ", "
-			<< typeid(T).name() << ", class ...Crgs(" << sizeof...(Crgs)
+			<< typeid(T).name() << ", class ...Args(" << sizeof...(Args)
 			<< ")> struct Log2<" << typeid(CharT).name() << ", "
-			<< typeid(T).name() << ", Crgs...(" << sizeof...(Crgs)
-			<< ")> : Log2<" << typeid(CharT).name() << ", Crgs...("
-			<< sizeof...(Crgs) << ")>" << endl;
+			<< typeid(T).name() << ", Args...(" << sizeof...(Args)
+			<< ")> : Log2<" << typeid(CharT).name() << ", Args...("
+			<< sizeof...(Args) << ")>" << endl;
 		cout << "  - Log2::ctor(" << v0 << ", Vs...(" << sizeof...(Vs) << "))"
 			<< endl;
 	}
@@ -72,20 +72,20 @@ struct Log2<CharT, T, Crgs...> : Log2<CharT, Crgs...>
 
 
 
-template <class CharT, class ...Crgs>
-struct Log : Log2<CharT, Crgs...>
+template <class CharT, class ...Args>
+struct Log : Log2<CharT, Args...>
 {
-	typedef Log2<CharT, Crgs...> base;
-	typedef Log<CharT, Crgs...> LOG_T;
+	typedef Log2<CharT, Args...> base;
+	typedef Log<CharT, Args...> LOG_T;
 
 	template <class ...Vs>
 	Log(std::ostream& strm, Vs&& ...vs)
 		: base(std::forward<Vs>(vs)...),
 		m_strm(strm)
 	{
-		cout << "template <" << typeid(CharT).name() << ", class ...Crgs("
-			<< sizeof...(Crgs) << ")> struct Log : Log2<"
-			<< typeid(CharT).name() << ", Crgs...(" << sizeof...(Crgs)
+		cout << "template <" << typeid(CharT).name() << ", class ...Args("
+			<< sizeof...(Args) << ")> struct Log : Log2<"
+			<< typeid(CharT).name() << ", Args...(" << sizeof...(Args)
 			<< ")>" << endl;
 		cout << "  - Log::ctor(Vs...(" << sizeof...(Vs) << "))" << endl;
 	}
@@ -108,10 +108,11 @@ template <class T> struct C;
 
 template <class T, class Base> struct A : Base
 {
-	A(std::unique_lock<std::mutex> ul, const char* p) {
+	template <class V>
+	A(std::unique_lock<std::mutex> ul, V&& p) {
 		m.swap(ul);
 		cout << "A::A()" << endl;
-		f(p);
+		f(std::forward<V>(p));
 	}
 	A(const A&) { cout << "A::A(const A&)" << endl; }
 	A(A&& r) {
@@ -125,7 +126,8 @@ template <class T, class Base> struct A : Base
 		cout << "temp<T> A::A(T&&)" << endl;
 	}
 
-	A& f(const char* p) {
+	template <class V>
+	A& f(V&& p) {
 		cout << "A::f(), " << p << endl;
 		return *this;
 	}
@@ -145,9 +147,10 @@ template <class T> struct C
 
 template <class T> struct B
 {
-	A<T, B> f(const char* p) {
+	template <class V>
+	A<T, B> f(V&& p) {
 		std::unique_lock<std::mutex> ul(m_mtx);
-		return A<int, B>(std::move(ul), p);
+		return A<int, B>(std::move(ul), std::forward<V>(p));
 	}
 	std::mutex m_mtx;
 };
@@ -158,6 +161,8 @@ struct D {
 	inline static int m = 456;
 	inline static std::string s = std::string("abc");
 };
+
+
 
 } //namespace Log
 
