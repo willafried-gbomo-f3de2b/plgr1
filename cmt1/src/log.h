@@ -1,11 +1,15 @@
 #pragma once 
 
+#include <mutex>
 
 namespace Log {
 
 
-class Log;
-extern Log g_Log;
+
+extern std::mutex g_LogMtx;
+
+
+
 
 
 

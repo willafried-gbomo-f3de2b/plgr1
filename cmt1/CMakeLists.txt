@@ -84,6 +84,7 @@ message(" -> CMAKE_CXX_FLAGS_RELEASE: ${CMAKE_CXX_FLAGS_RELEASE}")
 set(SOURCES 
 	src/main.cpp
 	#src/cfg.cpp
+	src/log.cpp
 	
 )
 
