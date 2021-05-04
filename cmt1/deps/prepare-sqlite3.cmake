@@ -1,7 +1,7 @@
 # thirdparty/sqlite3
 
 # sqlite3 amalgamation zip file
-set(SQLITE3_AMALGAMATION_ZIP_DOWNLOAD_URL "https://www.sqlite.org/2021/sqlite-amalgamation-3350400.zip" CACHE STRING "")
+set(SQLITE3_AMALGAMATION_ZIP_DOWNLOAD_URL "https://www.sqlite.org/2021/sqlite-amalgamation-3350500.zip" CACHE STRING "")
 
 # make directory
 file(MAKE_DIRECTORY ${SRCDIR}/sqlite3)
