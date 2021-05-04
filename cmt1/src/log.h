@@ -107,7 +107,7 @@ template <class T> struct C;
 
 template <class T, class Base> struct A : Base
 {
-	A(std::unique_ptr<C<int>> ul, const char* p) {
+	A(std::unique_lock<std::mutex> ul, const char* p) {
 		m.swap(ul);
 		cout << "A::A()" << endl;
 		f(p);
@@ -129,7 +129,7 @@ template <class T, class Base> struct A : Base
 		return *this;
 	}
 
-	std::unique_ptr<C<int>> m;
+	std::unique_lock<std::mutex> m;
 };
 
 template <class T> struct C
@@ -145,11 +145,12 @@ template <class T> struct C
 template <class T> struct B
 {
 	A<T, B> f(const char* p) {
-		std::unique_ptr<C<int>> ul(new C<int>);
+		std::unique_lock<std::mutex> ul(m_mtx);
 		// A<int, B> a(std::move(ul), p);
 		// return std::move(a);
 		return A<int, B>(std::move(ul), p);
 	}
+	std::mutex m_mtx;
 };
 
 

@@ -87,17 +87,20 @@ int main(void)
 	log.o(d + 0.7, LOGLEVEL::Info);
 	log.o(d);
 
+	std::vector<std::thread*> v1;
 	Log::B<int> b1;
-	std::thread t1([&]() {
-		b1.f("abc").f("123").f("x");
-		b1.f("xyz").f("321").f("y");
-		});
-	std::thread t2([&]() {
-		b1.f("ABC").f("456").f("X");
-		b1.f("XYZ").f("654").f("Y");
-		});
-	t1.join();
-	t2.join();
+	for (int i = 0; i < 10; i++) {
+		v1.push_back(new std::thread([&]() {
+			b1.f("abc").f("123").f("x");
+			b1.f("xyz").f("321").f("y");
+			}));
+		v1.push_back(new std::thread([&]() {
+			b1.f("ABC").f("456").f("X");
+			b1.f("XYZ").f("654").f("Y");
+			}));
+	}
+	for (auto x : v1)
+		x->join();
 
 	cout << "main(): end." << endl;
 }
