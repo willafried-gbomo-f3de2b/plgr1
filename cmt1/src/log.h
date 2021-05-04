@@ -103,5 +103,47 @@ struct Log : Log2<CharT, Args...>
 };
 
 
+template <class T> struct LogTmp;
+
+template <class Strm>
+struct LogBase
+{
+	LogBase(Strm& strm) : m_strm(strm)
+	{
+		
+	}
+	
+
+	template <class V>
+	LogTmp<Strm>& Write(V&& v)
+	{
+		m_strm << v;
+		return LogTmp<Strm>(std::move(m_lock));
+	}
+
+
+	inline static std::mutex m_mtx;
+	std::unique_lock<std::mutex> m_lock;
+	Strm& m_strm;
+};
+
+
+template <class T>
+struct LogTmp
+{
+	LogTmp(std::unique_lock<std::mutex>&& lock)
+	{
+		m_lock.swap(lock);
+	}
+	std::unique_lock<std::mutex> m_lock;
+
+	template <class V>
+	LogTmp Write(V&& v)
+	{
+
+	}
+};
+
+
 } //namespace Log
 
