@@ -83,6 +83,8 @@ int main(void)
 
 	UpnpFinish(upnplib);
 
+	std::cout << std::setw(8);
+
 	exstream::ostream2<char> o2;
 	o2 << std::setw(4);// << std::endl << std::hex << std::setw(4) << 0xff << ", " << std::string("abc") << endl;
 	//o2.operator<<(endl);

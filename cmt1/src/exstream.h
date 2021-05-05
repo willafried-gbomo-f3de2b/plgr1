@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 
 namespace exstream {
@@ -15,13 +16,13 @@ public:
     basic_ostream() : std::basic_ostream<charT, traits>(std::cout.rdbuf())
     {}
 
-    template <class V>
-    basic_ostream<charT, traits>& operator<<(V&& v)
-    {
-        cout << "basico V&&" << endl;
-        std::basic_ostream<charT, traits>::operator<<(std::forward<V>(v));
-        return *this;
-    }
+    // template <class V>
+    // basic_ostream<charT, traits>& operator<<(V&& v)
+    // {
+    //     cout << "basico V&&" << endl;
+    //     std::basic_ostream<charT, traits>::operator<<(std::forward<V>(v));
+    //     return *this;
+    // }
 
     // basic_ostream<charT, traits>& operator<<(bool n)
     // {
@@ -44,7 +45,7 @@ public:
     template <class V> ostream2& operator<<(V&& t)
     {
         cout << "post V" << endl;
-        basic_ostream<charT, traits>::operator<<(std::forward<V>(t));
+        std::basic_ostream<charT, traits>::operator<<(std::forward<V>(t));
         return *this;
     }
 

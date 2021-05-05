@@ -15,6 +15,22 @@
             "cStandard": "c17",
             "intelliSenseMode": "windows-msvc-x86",
             "cppStandard": "c++17"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/local/bin/clang",
+            "cStandard": "c17",
+            "intelliSenseMode": "linux-clang-x64",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [
+                    "/usr/local/include/c++/11.0.0/"
+                ]
+            }
         }
     ],
     "version": 4
