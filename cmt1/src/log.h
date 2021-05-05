@@ -156,12 +156,12 @@ template <class T> struct B
 };
 
 
-struct D {
-	static const int n = 123;
-	inline static int m = 456;
-	inline static std::string s = std::string("abc");
+template <class T>
+class Os : public std::ostream
+{
+public:
+	Os() : std::ostream(std::cout.rdbuf()) {}
 };
-
 
 
 } //namespace Log

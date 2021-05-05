@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <thread>
+#include <iomanip>
 
 using std::cout, std::endl;
 
@@ -102,12 +103,8 @@ int main(void)
 	for (auto x : v1)
 		x->join();
 
-	auto r = Log::D::n;
-	cout << r << ", " << &r /* <<", " << &Log::D::n */ << endl;
-	cout << Log::D::m << ", " << &Log::D::m << endl;
-	cout << Log::D::s << ", " << &Log::D::s << endl;
-
-	b1.f(123);
-
+	Log::Os<int> o;
+	o << std::hex << std::setw(4) << 0xff << endl;
+	
 	cout << "main(): end." << endl;
 }
