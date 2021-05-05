@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "/usr/local/include/c++/11.0.0/bits/move.h"
+#include <iostream>
 
 
 namespace exstream {
@@ -9,35 +9,46 @@ namespace exstream {
 using std::cout, std::endl;
 
 template <class charT, class traits = std::char_traits<charT>>
-class basic_ostream
+class basic_ostream : public std::basic_ostream<charT, traits>
 {
 public:
-    basic_ostream<charT, traits>& operator<<(bool n)
+    basic_ostream() : std::basic_ostream<charT, traits>(std::cout.rdbuf())
+    {}
+
+    template <class V>
+    basic_ostream<charT, traits>& operator<<(V&& v)
     {
-        cout << "bool" << endl;
+        cout << "basico V&&" << endl;
+        std::basic_ostream<charT, traits>::operator<<(std::forward<V>(v));
         return *this;
     }
 
-    basic_ostream<charT, traits>& operator<<(std::basic_ostream<charT, traits>&
-        (*pf)(std::basic_ostream<charT, traits>&))
-    {
-        cout << "pf(ostream)" << endl;
-        return *this;
-    }
+    // basic_ostream<charT, traits>& operator<<(bool n)
+    // {
+    //     cout << "bool" << endl;
+    //     return *this;
+    // }
+
+    // basic_ostream<charT, traits>& operator<<(std::basic_ostream<charT, traits>&
+    //     (*pf)(std::basic_ostream<charT, traits>&))
+    // {
+    //     cout << "pf(ostream)" << endl;
+    //     return *this;
+    // }
 };
 
 template <class charT, class traits = std::char_traits<charT>>
 class ostream2 : public basic_ostream<charT, traits>
 {
 public:
-    template <class T> ostream2& operator<<(T&& t)
+    template <class V> ostream2& operator<<(V&& t)
     {
-        cout << "post T" << endl;
-        basic_ostream<charT, traits>::operator<<(std::forward<T>(t));
+        cout << "post V" << endl;
+        basic_ostream<charT, traits>::operator<<(std::forward<V>(t));
         return *this;
     }
 
-    basic_ostream<charT, traits>& operator<<(std::basic_ostream<charT, traits>&
+    ostream2& operator<<(std::basic_ostream<charT, traits>&
         (*pf)(std::basic_ostream<charT, traits>&))
     {
         cout << "post pf(ostream)" << endl;
