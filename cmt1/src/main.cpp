@@ -87,20 +87,20 @@ int main(void)
 
 	exstream::A a; a.n = 555;
 	exstream::ostream<std::ostream> o2(std::cout);
-	o2 << a;
 	o2 << std::setw(4)
 		<< 123
 		<< std::setw(6)
 		<< "abc"
+		<< a
 		<< endl
-		;/*<< std::setw(4)
+		<< std::setw(4)
 		<< std::endl
 		<< std::hex
 		<< std::setw(4)
 		<< 0xff
 		<< ", "
 		<< std::string("abc")
-		<< endl;*/
+		<< endl;
 		//o2.operator<<(endl);
 
 

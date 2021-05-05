@@ -25,13 +25,13 @@ public:
 	template <class T>
 	tmp& operator<<(T&& t)
 	{
-		m_strm << std::forward<T>(t);
+		ls(std::forward<T>(t));
 		return *this;
 	}
 
 	tmp& operator<<(Strm& (*pf)(Strm&))
 	{
-		m_strm << pf;
+		ls(pf);
 		return *this;
 	}
 
@@ -77,8 +77,7 @@ public:
 };
 
 
-template <class Strm>
-ostream<Strm>& operator<<(ostream<Strm>& strm, A a)
+std::ostream& operator<<(std::ostream& strm, A a)
 {
 	strm << a.n;
 	return strm;
