@@ -83,7 +83,11 @@ int main(void)
 
 	UpnpFinish(upnplib);
 
-	
+	exstream::ostream2<char> o2;
+	o2 << endl;
+	//o2.operator<<(endl);
+
+
 	
 	cout << "main(): end." << endl;
 }
