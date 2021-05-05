@@ -103,9 +103,9 @@ int main(void)
 		<< endl;
 
 	std::vector<std::thread> v1;
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 20; i++) {
 		v1.push_back(std::thread([&v1, &o2]() {
-			o2 << std::dec << "123" << 456 << "789" << endl;
+			o2 << std::dec << "123" << 456 << endl;
 			}));
 		v1.push_back(std::thread([&v1, &o2]() {
 			o2 << "abc" << "def" << "hij" << endl;
