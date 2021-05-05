@@ -13,45 +13,50 @@ struct A {
 
 using std::cout, std::endl;
 
-template <class Base, class Strm>
-class tmp : public Base
+namespace detail {
+
+template <class Strm>
+class tmp
 {
-public:
-	tmp(Strm& strm) : Base(strm)
+	typedef typename Strm::stream_type ST;
+	friend Strm;
+
+	Strm& m_strm;
+
+	tmp(Strm& strm) : m_strm(strm)
 	{
 		cout << "tmp::ctor(Strm)" << endl;
 	}
 
+public:
 	~tmp()
 	{
 		cout << "tmp::dtor(Strm)" << endl;
 	}
 
-	template <class T>
-	tmp& operator<<(T&& t)
+	template <class T> tmp& operator<<(T&& t)
 	{
-		shl(std::forward<T>(t));
+		m_strm.shl(std::forward<T>(t));
 		return *this;
 	}
 
-	tmp& operator<<(Strm& (*pf)(Strm&))
+	tmp& operator<<(ST& (*pf)(ST&))
 	{
-		shl(pf);
+		m_strm.shl(pf);
 		return *this;
 	}
-
-
 };
+
+} //namespace detail
 
 
 template <class Strm>
 class ostream
 {
-public:
-	typedef tmp<ostream<Strm>, Strm> Tmp;
+	typedef detail::tmp<ostream<Strm>> Tmp;
+	friend Tmp;
 
-	Strm& m_strm;
-	
+public:
 	ostream(Strm& strm) : m_strm(strm)
 	{
 		cout << "ostream::ctor(Strm)" << endl;
@@ -66,17 +71,21 @@ public:
 	Tmp operator<<(T&& t)
 	{
 		shl(std::forward<T>(t));
-		return Tmp(m_strm);
+		return Tmp(*this);
 	}
 
 	Tmp operator<<(Strm& (*pf)(Strm&))
 	{
 		shl(pf);
-		return Tmp(m_strm);
+		return Tmp(*this);
 	}
 
-	template <class T>
-	void shl(T&& t)
+private:
+	typedef Strm stream_type;
+
+	Strm& m_strm;
+
+	template <class T> void shl(T&& t)
 	{
 		m_strm << std::forward<T>(t);
 	}
