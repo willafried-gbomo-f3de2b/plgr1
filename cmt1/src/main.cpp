@@ -82,29 +82,7 @@ int main(void)
 
 	UpnpFinish(upnplib);
 
-	double d = 2.2;
-	Log::Log<char, LOGLEVEL, double> log(std::cout, LOGLEVEL::Error, d);
-	log.o(d, LOGLEVEL::Debug, 1.111);
-	log.o(d + 0.7, LOGLEVEL::Info);
-	log.o(d);
-
-	std::vector<std::thread*> v1;
-	Log::B<int> b1;
-	for (int i = 0; i < 10; i++) {
-		v1.push_back(new std::thread([&]() {
-			b1.f("abc").f("123").f("x");
-			b1.f("xyz").f("321").f("y");
-			}));
-		v1.push_back(new std::thread([&]() {
-			b1.f("ABC").f("456").f("X");
-			b1.f("XYZ").f("654").f("Y");
-			}));
-	}
-	for (auto x : v1)
-		x->join();
-
-	Log::Os<int> o;
-	o << std::hex << std::setw(4) << 0xff << endl;
+	
 	
 	cout << "main(): end." << endl;
 }

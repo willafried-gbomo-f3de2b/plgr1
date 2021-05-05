@@ -112,7 +112,7 @@ template <class T, class Base> struct A : Base
 	A(std::unique_lock<std::mutex> ul, V&& p) {
 		m.swap(ul);
 		cout << "A::A()" << endl;
-		f(std::forward<V>(p));
+		this->operator<<(std::forward<V>(p));
 	}
 	A(const A&) { cout << "A::A(const A&)" << endl; }
 	A(A&& r) {
@@ -127,7 +127,7 @@ template <class T, class Base> struct A : Base
 	}
 
 	template <class V>
-	A& f(V&& p) {
+	A& operator<<(V&& p) {
 		cout << "A::f(), " << p << endl;
 		return *this;
 	}
@@ -148,7 +148,7 @@ template <class T> struct C
 template <class T> struct B
 {
 	template <class V>
-	A<T, B> f(V&& p) {
+	A<T, B> operator<<(V&& p) {
 		std::unique_lock<std::mutex> ul(m_mtx);
 		return A<int, B>(std::move(ul), std::forward<V>(p));
 	}
@@ -161,6 +161,14 @@ class Os : public std::ostream
 {
 public:
 	Os() : std::ostream(std::cout.rdbuf()) {}
+
+	template <class V>
+	A<T, Os> operator<<(V&& p) {
+		std::unique_lock<std::mutex> ul(m_mtx);
+		return A<T, Os>(std::move(ul), std::forward<V>(p));
+	}
+private:
+	std::mutex m_mtx;
 };
 
 
