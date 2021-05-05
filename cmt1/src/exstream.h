@@ -30,13 +30,13 @@ public:
 	template <class T>
 	tmp& operator<<(T&& t)
 	{
-		ls(std::forward<T>(t));
+		shl(std::forward<T>(t));
 		return *this;
 	}
 
 	tmp& operator<<(Strm& (*pf)(Strm&))
 	{
-		ls(pf);
+		shl(pf);
 		return *this;
 	}
 
@@ -65,23 +65,23 @@ public:
 	template <class T>
 	Tmp operator<<(T&& t)
 	{
-		ls(std::forward<T>(t));
+		shl(std::forward<T>(t));
 		return Tmp(m_strm);
 	}
 
 	Tmp operator<<(Strm& (*pf)(Strm&))
 	{
-		ls(pf);
+		shl(pf);
 		return Tmp(m_strm);
 	}
 
 	template <class T>
-	void ls(T&& t)
+	void shl(T&& t)
 	{
 		m_strm << std::forward<T>(t);
 	}
 
-	void ls(Strm& (*pf)(Strm&))
+	void shl(Strm& (*pf)(Strm&))
 	{
 		m_strm << pf;
 	}
