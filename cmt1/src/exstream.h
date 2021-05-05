@@ -22,6 +22,11 @@ public:
 		cout << "tmp::ctor(Strm)" << endl;
 	}
 
+	~tmp()
+	{
+		cout << "tmp::dtor(Strm)" << endl;
+	}
+
 	template <class T>
 	tmp& operator<<(T&& t)
 	{
@@ -46,9 +51,15 @@ public:
 	typedef tmp<ostream<Strm>, Strm> Tmp;
 
 	Strm& m_strm;
+	
 	ostream(Strm& strm) : m_strm(strm)
 	{
 		cout << "ostream::ctor(Strm)" << endl;
+	}
+
+	~ostream()
+	{
+		cout << "ostream::dtor(Strm)" << endl;
 	}
 
 	template <class T>
