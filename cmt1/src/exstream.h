@@ -1,9 +1,12 @@
 #pragma once
 
 #include <string>
+#include "/usr/local/include/c++/11.0.0/bits/move.h"
 
 
 namespace exstream {
+
+using std::cout, std::endl;
 
 template <class charT, class traits = std::char_traits<charT>>
 class basic_ostream
@@ -30,7 +33,7 @@ public:
     template <class T> ostream2& operator<<(T&& t)
     {
         cout << "post T" << endl;
-        basic_ostream::operator<<(std::forward<T>(t));
+        basic_ostream<charT, traits>::operator<<(std::forward<T>(t));
         return *this;
     }
 
@@ -38,7 +41,7 @@ public:
         (*pf)(std::basic_ostream<charT, traits>&))
     {
         cout << "post pf(ostream)" << endl;
-        basic_ostream::operator<<(pf);
+        basic_ostream<charT, traits>::operator<<(pf);
         return *this;
     }
 };
