@@ -3,6 +3,7 @@
 
 #include "cfg.h"
 #include "log.h"
+#include "exstream.h"
 
 #include <iostream>
 #include <fstream>

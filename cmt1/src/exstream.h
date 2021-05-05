@@ -6,6 +6,6 @@ template <class CharT>
 class basic_ostream 
 {
 
-}
+};
 
 } //namespace exstream
