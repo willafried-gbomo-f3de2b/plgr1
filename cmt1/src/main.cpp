@@ -101,9 +101,24 @@ int main(void)
 		<< ", "
 		<< std::string("abc")
 		<< endl;
-		//o2.operator<<(endl);
 
+	std::vector<std::thread> v1;
+	for (int i = 0; i < 10; i++) {
+		v1.push_back(std::thread([&v1, &o2]() {
+			o2 << std::dec << "123" << 456 << "789" << endl;
+			}));
+		v1.push_back(std::thread([&v1, &o2]() {
+			o2 << "abc" << "def" << "hij" << endl;
+			}));
+		v1.push_back(std::thread([&v1, &o2]() {
+			o2 << std::hex << std::setfill('0') << std::setw(4) << 0x0123
+				<< 0x4567 << "89ab" << 0xcdef << endl;
+			}));
+	}
 
+	for (auto& x : v1) {
+		x.join();
+	}
 
 	cout << "main(): end." << endl;
 }
