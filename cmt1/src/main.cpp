@@ -85,9 +85,23 @@ int main(void)
 
 	std::cout << std::setw(8);
 
-	exstream::ostream2<char> o2;
-	o2 << std::setw(4);// << std::endl << std::hex << std::setw(4) << 0xff << ", " << std::string("abc") << endl;
-	//o2.operator<<(endl);
+	exstream::A a; a.n = 555;
+	exstream::ostream<std::ostream> o2(std::cout);
+	o2 << a;
+	o2 << std::setw(4)
+		<< 123
+		<< std::setw(6)
+		<< "abc"
+		<< endl
+		;/*<< std::setw(4)
+		<< std::endl
+		<< std::hex
+		<< std::setw(4)
+		<< 0xff
+		<< ", "
+		<< std::string("abc")
+		<< endl;*/
+		//o2.operator<<(endl);
 
 
 
