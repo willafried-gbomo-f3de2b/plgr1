@@ -16,7 +16,7 @@ struct A {
 using std::cout, std::endl;
 
 namespace detail {
-
+	
 typedef std::mutex mutex_type;
 typedef std::unique_lock<mutex_type> lock_type;
 
