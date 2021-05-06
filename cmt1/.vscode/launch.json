@@ -8,12 +8,13 @@
             "program": "${workspaceFolder}/build/Debug/main.exe",
             "args": [],
             "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/build",
             "environment": [
                 {
                     "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/Debug/bin"
                 }
             ],
+            
             "console": "integratedTerminal",
             "preLaunchTask": "task [win]: build-main-debug",
         },
@@ -24,7 +25,7 @@
             "program": "${workspaceFolder}/build/Release/main.exe",
             "args": [],
             "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/build",
             "environment": [
                 {
                     "name": "path", "value": "${env:PATH};${workspaceFolder}/build/deps/out/Release/bin"
@@ -40,7 +41,7 @@
             "program": "${workspaceFolder}/build/main",
             "args": [],
             "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/build",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

@@ -2,7 +2,8 @@
 
 #include <matroska/FileKax.h>
 
-#include <sqlite3/sqlite3ext.h>
+#include <sqlite3/sqlite3.h>
+//#include <sqlite3/sqlite3ext.h>
 
 
 #ifdef _WIN32

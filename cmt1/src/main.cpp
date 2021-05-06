@@ -68,6 +68,17 @@ int main(void)
 	matroska_init();
 
 	sqlite3_initialize();
+	sqlite3* db = nullptr;
+	std::string db_path = "cmt1.db";
+	if (int rc = sqlite3_open(db_path.c_str(), &db); rc != 0) {
+		cout << "error: sqlite3_open(), " << rc;
+	} else {
+		cout << "db: 0x" << std::hex << db << endl;
+	}
+	// sqlite3_exec
+	if (int rc = sqlite3_close(db); rc) {
+		cout << "error: sqlite3_close(), " << rc;
+	}
 
 	UpnpLog* upnplog = UpnpLog_new();
 	UpnpInitLog(upnplog);
