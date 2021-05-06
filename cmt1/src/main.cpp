@@ -44,8 +44,8 @@ int main(void)
 	int port = 0;
 	std::string logname = "pupnp1.log";
 
-	bool b = Cfg::ReadCfg("cmt1.cfg",
-		[&](const Cfg::READCFG_CALLBACK_PARAMS<char>* params)
+	bool b = Cfg::ReadCfg("../cmt1.cfg",
+		[&](const Cfg::READCFG_CALLBACK_PARAMS<char>* params, void* userdata)
 		{
 			cout << "  [" << params->line_number << "] |";
 			if (params->key)
@@ -63,7 +63,7 @@ int main(void)
 				}
 			}
 			return true;
-		});
+		}, (void*)1234);
 
 	matroska_init();
 

@@ -22,21 +22,21 @@ template <class CharT> struct READCFG_CALLBACK_PARAMS
 
 
 template <class CharT, class CB>
-bool ReadCfg(std::basic_istream<CharT>& strm, CB callback)
+bool ReadCfg(std::basic_istream<CharT>& strm, CB callback, void* userdata)
 {
 	detail::CfgReader<CharT> cfg(strm);
-	return cfg.Read(callback);
+	return cfg.Read(callback, userdata);
 }
 
 
 template <class CharT = char, class CB>
-bool ReadCfg(const char* path, CB callback)
+bool ReadCfg(const char* path, CB callback, void* userdata)
 {
 	std::basic_ifstream<CharT> ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
 		return false;
-	return ReadCfg(ifs, callback);
+	return ReadCfg(ifs, callback, userdata);
 }
 
 
@@ -64,7 +64,7 @@ template <class CharT> struct CfgReader
 
 	CfgReader(std::basic_istream<CharT>& s) : m_strm(s) {}
 
-	template <class CB> bool Read(CB callback)
+	template <class CB> bool Read(CB callback, void* userdata)
 	{
 		std::vector<CharT> buf(10 * 1024);
 		int line_number = 0;
@@ -96,7 +96,7 @@ template <class CharT> struct CfgReader
 			params.key = key.empty() ? nullptr : key.c_str();
 			params.val = val.c_str();
 			params.line_number = line_number;
-			if (!callback(&params))
+			if (!callback(&params, userdata))
 				return false;
 		}
 
