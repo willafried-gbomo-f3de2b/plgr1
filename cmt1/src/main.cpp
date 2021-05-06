@@ -32,7 +32,6 @@ std::basic_ostream<CharT>& operator<<(std::basic_ostream<CharT>& os,
 }
 
 
-
 int main(void)
 {
 	cout << endl;
