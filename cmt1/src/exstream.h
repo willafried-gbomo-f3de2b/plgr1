@@ -9,10 +9,6 @@
 
 namespace exstream {
 
-struct A {
-	int n;
-};
-
 using std::cout, std::endl;
 
 namespace detail {
@@ -31,16 +27,11 @@ class tmp
 
 	tmp(Strm& strm, lock_type&& lck) : m_strm(strm)
 	{
-
 		m_lock.swap(lck);
-		//cout << "tmp::ctor(Strm)" << endl;
 	}
 
 public:
-	~tmp()
-	{
-		//cout << "tmp::dtor(Strm)" << endl;
-	}
+	~tmp() {}
 
 	template <class T> tmp& operator<<(T&& t)
 	{
@@ -65,15 +56,9 @@ class ostream
 	friend Tmp;
 
 public:
-	ostream(Strm& strm) : m_strm(strm)
-	{
-		// cout << "ostream::ctor(Strm)" << endl;
-	}
+	ostream(Strm& strm) : m_strm(strm) {}
 
-	~ostream()
-	{
-		// cout << "ostream::dtor(Strm)" << endl;
-	}
+	~ostream() {}
 
 	template <class T>
 	Tmp operator<<(T&& t)
@@ -106,13 +91,5 @@ private:
 		m_strm << pf;
 	}
 };
-
-
-std::ostream& operator<<(std::ostream& strm, A a)
-{
-	strm << a.n;
-	return strm;
-}
-
 
 } //namespace exstream

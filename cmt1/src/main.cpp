@@ -112,25 +112,7 @@ int main(void)
 
 	UpnpFinish(upnplib);
 
-	std::cout << std::setw(8);
-
-	exstream::A a; a.n = 555;
-	exstream::ostream<std::ostream> o2(std::cout);
-	o2 << std::setw(4)
-		<< 123
-		<< std::setw(6)
-		<< "abc"
-		<< a
-		<< endl
-		<< std::setw(4)
-		<< std::endl
-		<< std::hex
-		<< std::setw(4)
-		<< 0xff
-		<< ", "
-		<< std::string("abc")
-		<< endl;
-
+	exstream::ostream o2(cout);
 	std::vector<std::thread> v1;
 	for (int i = 0; i < 20; i++) {
 		v1.push_back(std::thread([&v1, &o2]() {
