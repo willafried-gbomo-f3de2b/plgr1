@@ -1,11 +1,13 @@
 #pragma once
 
+#include <vector>
 #include <string>
 #include <string_view>
 
 #ifdef WIN32
 #include <Windows.h>
 #else //#ifdef WIN32
+#include <unistd.h>
 #endif //#ifdef WIN32
 
 namespace Path {
@@ -73,7 +75,7 @@ std::basic_string<charT> GetSelfExtTmpl(void)
 	str_t name =  GetSelfNameTmpl<charT>();
 	auto pos = name.find_last_of('.');
 	if (pos == str_t::npos) {
-		return std::move(name);
+		return "";
 	}
 	return name.substr(pos + 1);
 }
@@ -136,66 +138,52 @@ inline std::wstring GetSelfExt(void)
 
 #else //#ifdef WIN32
 
-template <class charT>
-std::basic_string<charT> GetSelfPathTmpl(void)
+inline std::string GetSelfPath(void)
 {
-	typedef std::basic_string<charT> str_t;
-	std::vector<charT> buf(1000);
-	DWORD n = ::GetModuleFileName(NULL, buf.data(), (DWORD)buf.size());
-	if (n == 0 || n == (DWORD)buf.size()) {
-		return "";
+	std::vector<char> buf(1000);
+	ssize_t n = readlink("/proc/self/exe", buf.data(), buf.size());
+	if (n > 0) {
+		return std::string(&buf.front(), n);
 	}
-	return std::basic_string<charT>(&buf.front(), n);
+	return "";
 }
 
-
-template <class charT>
-std::basic_string<charT> GetSelfDirTmpl(void)
+inline std::string GetSelfDir(void)
 {
-	typedef std::basic_string<charT> str_t;
-	str_t path = GetSelfPathTmpl<charT>();
-	auto pos = path.find_last_of('\\');
-	if (pos == str_t::npos) {
+	std::string path = GetSelfPath();
+	auto pos = path.find_last_of('/');
+	if (pos == std::string::npos) {
 		return std::move(path);
 	}
 	return path.substr(0, pos);
 }
 
-
-template <class charT>
-std::basic_string<charT> GetSelfNameTmpl(void)
+inline std::string GetSelfName(void)
 {
-	typedef std::basic_string<charT> str_t;
-	str_t path =  GetSelfPathTmpl<charT>();
-	auto pos = path.find_last_of('\\');
-	if (pos == str_t::npos) {
+	std::string path = GetSelfPath();
+	auto pos = path.find_last_of('/');
+	if (pos == std::string::npos) {
 		return std::move(path);
 	}
 	return path.substr(pos + 1);
 }
 
-
-template <class charT>
-std::basic_string<charT> GetSelfBaseNameTmpl(void)
+inline std::string GetSelfBaseName(void)
 {
-	typedef std::basic_string<charT> str_t;
-	str_t name =  GetSelfNameTmpl<charT>();
+	std::string name = GetSelfName();
 	auto pos = name.find_last_of('.');
-	if (pos == str_t::npos) {
+	if (pos == std::string::npos) {
 		return std::move(name);
 	}
 	return name.substr(0, pos);
 }
 
-
-template <class charT>
-std::basic_string<charT> GetSelfExtTmpl(void)
+inline std::string GetSelfExt(void)
 {
-	typedef std::basic_string<charT> str_t;
-	str_t name =  GetSelfNameTmpl<charT>();
-	auto pos = name.find_last_of('.');
-	if (pos == str_t::npos) {
-		return std::move(name);
+	std::string name = GetSelfName();
+	auto pos = name.find_last_of('/');
+	if (pos == std::string::npos) {
+		return "";
 	}
 	return name.substr(pos + 1);
 }
