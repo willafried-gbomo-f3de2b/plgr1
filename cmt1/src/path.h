@@ -28,6 +28,19 @@ std::basic_string<charT> GetSelfPathTmpl(void)
 	return std::basic_string<charT>(&buf.front(), n);
 }
 
+#else //#ifdef WIN32
+
+inline std::string GetSelfPath(void)
+{
+	std::vector<char> buf(1000);
+	ssize_t n = readlink("/proc/self/exe", buf.data(), buf.size());
+	if (n > 0) {
+		return std::string(&buf.front(), n);
+	}
+	return "";
+}
+
+#endif //#ifdef WIN32
 
 template <class charT>
 std::basic_string<charT> GetSelfDirTmpl(void)
@@ -135,60 +148,6 @@ inline std::wstring GetSelfExt(void)
 }
 
 #endif //#ifndef UNICODE 
-
-#else //#ifdef WIN32
-
-inline std::string GetSelfPath(void)
-{
-	std::vector<char> buf(1000);
-	ssize_t n = readlink("/proc/self/exe", buf.data(), buf.size());
-	if (n > 0) {
-		return std::string(&buf.front(), n);
-	}
-	return "";
-}
-
-inline std::string GetSelfDir(void)
-{
-	std::string path = GetSelfPath();
-	auto pos = path.find_last_of('/');
-	if (pos == std::string::npos) {
-		return std::move(path);
-	}
-	return path.substr(0, pos);
-}
-
-inline std::string GetSelfName(void)
-{
-	std::string path = GetSelfPath();
-	auto pos = path.find_last_of('/');
-	if (pos == std::string::npos) {
-		return std::move(path);
-	}
-	return path.substr(pos + 1);
-}
-
-inline std::string GetSelfBaseName(void)
-{
-	std::string name = GetSelfName();
-	auto pos = name.find_last_of('.');
-	if (pos == std::string::npos) {
-		return std::move(name);
-	}
-	return name.substr(0, pos);
-}
-
-inline std::string GetSelfExt(void)
-{
-	std::string name = GetSelfName();
-	auto pos = name.find_last_of('/');
-	if (pos == std::string::npos) {
-		return "";
-	}
-	return name.substr(pos + 1);
-}
-
-#endif //#ifdef WIN32
 
 } //inline namespace v1
 
