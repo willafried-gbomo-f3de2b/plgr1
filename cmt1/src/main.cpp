@@ -5,6 +5,7 @@
 #include "log.h"
 #include "exstream.h"
 #include "path.h"
+#include "appcfg.h"
 
 #include <iostream>
 #include <fstream>
@@ -14,6 +15,10 @@
 #include <iomanip>
 
 using std::cout, std::endl;
+
+bool db_init(void);
+
+AppCfg::AppCfg g_Cfg;
 
 
 template <class CharT>
@@ -64,6 +69,9 @@ int main(void)
 			if (params->key) {
 				std::string key_str(params->key);
 				std::string val_str(Cfg::Unquote(params->val));
+				//g_Cfg.push_back({ params->key, params->val,
+				//params->line_number
+				//});
 				cfg_map[key_str] = val_str;
 				if (key_str == "nw_name") {
 					ifname = val_str;
@@ -75,9 +83,9 @@ int main(void)
 			return true;
 		}, (void*)1234);
 
-	for (auto& x : cfg_map) {
-		cout << "  cfg: " << x.first << "=" << x.second << endl;
-	}
+	g_Cfg = cfg_map;
+
+	db_init();
 
 	matroska_init();
 
@@ -147,3 +155,22 @@ int main(void)
 
 	cout << "main(): end." << endl;
 }
+
+
+bool db_init(void)
+{
+	std::string db_path;
+	if (auto iter = g_Cfg.find("db_path");
+		iter == g_Cfg.end() || iter->second.empty())
+	{
+		db_path = Path::GetSelfDir() + Path::GetSepString()
+			+ Path::GetSelfBaseName() + ".db";
+	}
+	else {
+		db_path = iter->second;
+	}
+	cout << "db_init(): db_path=" << db_path << endl;
+
+	return true;
+}
+

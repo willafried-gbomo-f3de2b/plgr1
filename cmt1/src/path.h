@@ -176,4 +176,59 @@ inline std::wstring GetSelfExt(void)
 
 } //inline namespace v1
 
+
+inline namespace v1 {
+
+#ifdef WIN32
+
+template <class charT = char> 
+const std::basic_string<charT>& GetSepStringBase(void)
+{
+	static const std::basic_string<charT> sep = "\\";
+	return sep;
+}
+
+template <> 
+inline const std::basic_string<wchar_t>& GetSepStringBase<wchar_t>(void)
+{
+	static const std::basic_string<wchar_t> sep = L"\\";
+	return sep;
+}
+
+#else //#ifdef WIN32
+
+template <class charT = char> 
+const std::basic_string<charT>& GetSepStringBase(void)
+{
+	static const std::basic_string<charT> sep = "/";
+	return sep;
+}
+
+template <> 
+inline const std::basic_string<wchar_t>& GetSepStringBase<wchar_t>(void)
+{
+	static const std::basic_string<wchar_t> sep = L"/";
+	return sep;
+}
+
+#endif //#ifdef WIN32
+
+#ifndef UNICODE
+
+inline const std::string& GetSepString(void)
+{
+	return GetSepStringBase<char>();
+}
+
+#else //#ifndef UNICODE
+
+inline const std::string& GetSepString(void)
+{
+	return GetSepStringBase<wchar_t>();
+}
+
+#endif //#ifndef UNICODE
+
+} //inline namespace v1
+
 } //namespace path
