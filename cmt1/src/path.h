@@ -28,20 +28,6 @@ std::basic_string<charT> GetSelfPathTmpl(void)
 	return std::basic_string<charT>(&buf.front(), n);
 }
 
-#else //#ifdef WIN32
-
-inline std::string GetSelfPath(void)
-{
-	std::vector<char> buf(1000);
-	ssize_t n = readlink("/proc/self/exe", buf.data(), buf.size());
-	if (n > 0) {
-		return std::string(&buf.front(), n);
-	}
-	return "";
-}
-
-#endif //#ifdef WIN32
-
 template <class charT>
 std::basic_string<charT> GetSelfDirTmpl(void)
 {
@@ -67,6 +53,45 @@ std::basic_string<charT> GetSelfNameTmpl(void)
 	return path.substr(pos + 1);
 }
 
+#else //#ifdef WIN32
+
+template <class charT>
+inline std::string GetSelfPathTmpl(void)
+{
+	std::vector<char> buf(1000);
+	ssize_t n = readlink("/proc/self/exe", buf.data(), buf.size());
+	if (n > 0) {
+		return std::string(&buf.front(), n);
+	}
+	return "";
+}
+
+template <class charT>
+std::basic_string<charT> GetSelfDirTmpl(void)
+{
+	typedef std::basic_string<charT> str_t;
+	str_t path = GetSelfPathTmpl<charT>();
+	auto pos = path.find_last_of('/');
+	if (pos == str_t::npos) {
+		return std::move(path);
+	}
+	return path.substr(0, pos);
+}
+
+
+template <class charT>
+std::basic_string<charT> GetSelfNameTmpl(void)
+{
+	typedef std::basic_string<charT> str_t;
+	str_t path =  GetSelfPathTmpl<charT>();
+	auto pos = path.find_last_of('/');
+	if (pos == str_t::npos) {
+		return std::move(path);
+	}
+	return path.substr(pos + 1);
+}
+
+#endif //#ifdef WIN32
 
 template <class charT>
 std::basic_string<charT> GetSelfBaseNameTmpl(void)
