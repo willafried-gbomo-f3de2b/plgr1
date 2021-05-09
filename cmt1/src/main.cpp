@@ -89,37 +89,6 @@ int main(void)
 
 	matroska_init();
 
-	sqlite3_initialize();
-	sqlite3* db = nullptr;
-	std::string db_path = "cmt1.db";
-	if (int rc = sqlite3_open(db_path.c_str(), &db); rc != 0) {
-		cout << "error: sqlite3_open(), " << rc;
-	}
-	else {
-		cout << "db: 0x" << std::hex << db << endl;
-	}
-
-	std::string sql1 = "create table tb1 ("
-		"  id integer, "
-		"  name string"
-		");";
-	std::string sql2 = "select * from tb1;";
-	char* errmsg = nullptr;
-	auto cb1 = [](void*, int, char**, char**) -> int {
-		return 0;
-	};
-	if (int rc = sqlite3_exec(db, sql1.c_str(), cb1, (void*)1234, &errmsg); rc)
-	{
-		cout << "eer-sql1: " << rc << ", " << errmsg << endl;
-	}
-	if (int rc = sqlite3_exec(db, sql2.c_str(), cb1, (void*)1234, &errmsg); rc)
-	{
-		cout << "eer-sql2: " << rc << endl;
-	}
-
-	if (int rc = sqlite3_close(db); rc) {
-		cout << "error: sqlite3_close(), " << rc;
-	}
 
 	UpnpLog* upnplog = UpnpLog_new();
 	UpnpInitLog(upnplog);
@@ -170,6 +139,37 @@ bool db_init(void)
 		db_path = iter->second;
 	}
 	cout << "db_init(): db_path=" << db_path << endl;
+
+	sqlite3_initialize();
+	sqlite3* db = nullptr;
+	if (int rc = sqlite3_open(db_path.c_str(), &db); rc != 0) {
+		cout << "error: sqlite3_open(), " << rc;
+	}
+	else {
+		cout << "db: 0x" << std::hex << db << endl;
+	}
+
+	std::string sql1 = "create table tb1 ("
+		"  id integer, "
+		"  name string"
+		");";
+	std::string sql2 = "select * from tb1;";
+	char* errmsg = nullptr;
+	auto cb1 = [](void*, int, char**, char**) -> int {
+		return 0;
+	};
+	if (int rc = sqlite3_exec(db, sql1.c_str(), cb1, (void*)1234, &errmsg); rc)
+	{
+		cout << "eer-sql1: " << rc << ", " << errmsg << endl;
+	}
+	if (int rc = sqlite3_exec(db, sql2.c_str(), cb1, (void*)1234, &errmsg); rc)
+	{
+		cout << "eer-sql2: " << rc << endl;
+	}
+
+	if (int rc = sqlite3_close(db); rc) {
+		cout << "error: sqlite3_close(), " << rc;
+	}
 
 	return true;
 }
