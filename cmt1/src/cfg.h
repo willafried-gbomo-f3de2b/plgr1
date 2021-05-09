@@ -49,6 +49,8 @@ std::basic_string<std::remove_const_t<CharT>> Unquote(CharT* str)
 			sv.remove_prefix(1); sv.remove_suffix(1);
 		}
 	}
+	if (sv.empty()) 
+		return "";
 	return std::basic_string<std::remove_const_t<CharT>>(&sv.front(),
 		sv.size());
 }

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
 #include <thread>
 #include <iomanip>
 
@@ -51,6 +52,7 @@ int main(void)
 	int port = 0;
 	std::string logname = "pupnp1.log";
 
+	std::map<std::string, std::string> cfg_map;
 	bool b = Cfg::ReadCfg("../cmt1.cfg",
 		[&](const Cfg::READCFG_CALLBACK_PARAMS<char>* params, void* userdata)
 		{
@@ -62,6 +64,7 @@ int main(void)
 			if (params->key) {
 				std::string key_str(params->key);
 				std::string val_str(Cfg::Unquote(params->val));
+				cfg_map[key_str] = val_str;
 				if (key_str == "nw_name") {
 					ifname = val_str;
 				}
@@ -71,6 +74,10 @@ int main(void)
 			}
 			return true;
 		}, (void*)1234);
+
+	for (auto& x : cfg_map) {
+		cout << "  cfg: " << x.first << "=" << x.second << endl;
+	}
 
 	matroska_init();
 
