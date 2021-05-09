@@ -1,5 +1,8 @@
 #include "log.h"
 
+#include "exstream.h"
+#include "path.h"
+
 
 namespace Log {
 

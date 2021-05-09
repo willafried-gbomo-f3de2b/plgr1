@@ -4,6 +4,7 @@
 #include "cfg.h"
 #include "log.h"
 #include "exstream.h"
+#include "path.h"
 
 #include <iostream>
 #include <fstream>
@@ -39,6 +40,12 @@ int main(void)
 
 	const char* locstr = setlocale(LC_ALL, "");
 	cout << "locale: " << locstr << endl;
+
+	std::string self_path = Path::GetSelfPath();
+	std::string self_dir = Path::GetSelfDir();
+	std::string self_name = Path::GetSelfName();
+	std::string self_base = Path::GetSelfBaseName();
+	std::string self_ext = Path::GetSelfExt();
 
 	std::string ifname;
 	int port = 0;
