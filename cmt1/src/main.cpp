@@ -101,7 +101,9 @@ int main(void)
 
 	auto fsd = FLAC__stream_decoder_new();
 
-	UpnpFinish(upnplib);
+	if (upnplib) {
+		UpnpFinish(upnplib);
+	}
 
 	exstream::ostream o2(cout);
 	std::vector<std::thread> v1;
